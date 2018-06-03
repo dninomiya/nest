@@ -1,21 +1,53 @@
 <div class="grid-container">
   <mat-grid-list cols="2" rowHeight="350px">
-    <mat-grid-tile *ngFor="let card of cards" [colspan]="card.cols" [rowspan]="card.rows">
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-card class="dashboard-card">
+        <mat-card-content class="dashboard-card-content">
+          <div class="rank-wrap">
+            <div class="rank">
+              <p class="rank__label">A</p>
+              <mat-progress-spinner color="" class="rank__progress" [value]="70"></mat-progress-spinner>
+            </div>
+            <p class="rank-hint">次のランクまであと
+              <strong>X</strong>ポイント</p>
+            <div class="prices">
+              <p class="price">10,000円/日</p>
+              <p class="price">20,000円/月</p>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
       <mat-card class="dashboard-card">
         <mat-card-header>
-          <mat-card-title>
-            {{card.title}}
-            <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu" xPosition="before">
-              <button mat-menu-item>Expand</button>
-              <button mat-menu-item>Remove</button>
-            </mat-menu>
-          </mat-card-title>
+          <mat-card-title>Todo</mat-card-title>
         </mat-card-header>
         <mat-card-content class="dashboard-card-content">
-          <div>Card Content Here</div>
+          <mat-selection-list>
+            <mat-list-option><span>「BEM」を終了させましょう。<span class="point">20</span></span></mat-list-option>
+            <mat-list-option><span>プロフィールを入力しましょう。<span class="point">10</span></span></mat-list-option>
+            <mat-list-option><span>デイリーレポートを送信する。<span class="point">10</span></span></mat-list-option>
+          </mat-selection-list>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="2" [rowspan]="1">
+      <mat-card class="dashboard-card">
+        <mat-card-header>
+          <mat-card-title>Team</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="dashboard-card-content">
+          <div class="rank-wrap">
+            <div class="rank">
+              <p class="rank__label">A</p>
+              <mat-progress-spinner color="" class="rank__progress" [value]="70"></mat-progress-spinner>
+            </div>
+            <p class="rank-hint">次のランクまであと
+              <strong>X</strong>ポイント</p>
+          </div>
         </mat-card-content>
       </mat-card>
     </mat-grid-tile>
