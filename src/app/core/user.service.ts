@@ -1,4 +1,8 @@
 import { Injectable } from '@angular/core';
+import { map } from 'rxjs/operators';
+
+import { AngularFirestore } from 'angularfire2/firestore';
+import { Observable } from 'rxjs';
 
 export interface User {
   uid: string;
@@ -38,5 +42,16 @@ export const MockUsers: User[] = [
 })
 export class UserService {
 
-  constructor() { }
+  constructor(
+    private db: AngularFirestore
+  ) { }
+
+  getUser(gitHub: string): Observable<User> {
+    return this.db
+      .collection<User>('users', ref => ref.where('gitHub', '==', gitHub))
+      .valueChanges()
+      .pipe(
+        map(users => users[0])
+      );
+  }
 }

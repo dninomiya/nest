@@ -1,8 +1,37 @@
-:host {
-  padding: 30px;
-  display: block;
-}
-
 .content {
   padding: 24px;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  &__body {
+    padding: 0 15px;
+  }
+  &__image {
+    width: 100px;
+    border-radius: 50%px;
+  }
+  &__name {
+    font-weight: bold;
+    font-size: 30px;
+    margin: 0;
+  }
+  &__type {
+    font-size: 12px;
+    color: #999;
+    margin: 8px 0 0;
+  }
+}
+
+.grid-container {
+  margin: 20px;
+}
+
+.card {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
 }

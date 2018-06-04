@@ -1,19 +1,84 @@
-<mat-card class="mat-elevation-z8">
-  <mat-tab-group>
-    <mat-tab label="プロフィール">
-      <div class="content">
-        <p>プロフィール</p>
-      </div>
-    </mat-tab>
-    <mat-tab label="実績">
-      <div class="content">
-        <p>実績</p>
-      </div>
-    </mat-tab>
-    <mat-tab label="バッジ">
+<div *ngIf="user" class="grid-container">
+  <mat-grid-list cols="2" rowHeight="350px">
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-card class="card">
+        <mat-card-header>
+          <mat-card-title>プロフィール</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="profile">
+            <img src="https://avatars.githubusercontent.com/{{user.gitHub}}" alt="" class="profile__image">
+            <div class="profile__body">
+              <p class="profile__name">{{user.gitHub}}</p>
+              <p class="profile__type">{{user.type || 'タイプ未設定'}}</p>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-card class="card">
+        <mat-card-header>
+          <mat-card-title>スキル</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="2" [rowspan]="1">
+      <mat-card class="card">
+        <mat-card-header>
+          <mat-card-title>実績</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="2">
+      <mat-card class="card">
+        <mat-card-header>
+          <mat-card-title>職歴</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="2">
+      <mat-card class="card">
+        <mat-card-header>
+          <mat-card-title>学歴</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
+
+<mat-card *ngIf="user">
+  <mat-card-content>
+    <mat-tab-group>
+      <mat-tab label="プロフィール">
+        <div class="content">
+          <div class="user-card">
+            <img src="https://avatars.githubusercontent.com/{{user.gitHub}}" alt="" class="user-card__image">
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="実績">
+        <div class="content">
+          <p>実績</p>
+        </div>
+      </mat-tab>
+      <mat-tab label="バッジ">
         <div class="content">
           <p>バッジ</p>
         </div>
       </mat-tab>
-  </mat-tab-group>
+    </mat-tab-group>
+  </mat-card-content>
 </mat-card>

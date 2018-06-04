@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService, User } from '../../core/user.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'nest-user-detail',
@@ -7,7 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserDetailComponent implements OnInit {
 
-  constructor() { }
+  user: User;
+
+  constructor(
+    private userService: UserService,
+    private route: ActivatedRoute
+  ) {
+    userService.getUser(route.snapshot.params.id).subscribe(user => this.user = user);
+  }
 
   ngOnInit() {
   }
