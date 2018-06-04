@@ -2,6 +2,9 @@
   <mat-grid-list cols="2" rowHeight="350px">
     <mat-grid-tile [colspan]="1" [rowspan]="1">
       <mat-card class="dashboard-card">
+        <button mat-icon-button class="card-button" (click)="openRankDialog()">
+          <mat-icon>help</mat-icon>
+        </button>
         <mat-card-content class="dashboard-card-content">
           <div class="rank-wrap">
             <div class="rank">
@@ -82,14 +85,8 @@
 
     <mat-grid-tile [colspan]="1" [rowspan]="1">
       <mat-card class="dashboard-card">
-        <mat-card-header>
-          <mat-card-title>Note</mat-card-title>
-        </mat-card-header>
         <mat-card-content class="dashboard-card-content">
-          <mat-list dense>
-            <mat-list-item>何もしないと毎日ポイントが減っていきます。</mat-list-item>
-            <mat-list-item>何もしないと毎日ポイントが減っていく</mat-list-item>
-          </mat-list>
+          <iframe class="movie" src="https://www.youtube.com/embed/3IiWmNCEmL8?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         </mat-card-content>
       </mat-card>
     </mat-grid-tile>

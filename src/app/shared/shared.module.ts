@@ -19,6 +19,8 @@ import {
   MatChipsModule,
   MatProgressSpinnerModule,
   MatTooltipModule,
+  MatExpansionModule,
+  MatDialogModule,
 } from '@angular/material';
 
 @NgModule({
@@ -42,6 +44,8 @@ import {
     MatChipsModule,
     MatProgressSpinnerModule,
     MatTooltipModule,
+    MatExpansionModule,
+    MatDialogModule,
   ],
   declarations: [],
   exports: [
@@ -63,6 +67,8 @@ import {
     MatChipsModule,
     MatProgressSpinnerModule,
     MatTooltipModule,
+    MatExpansionModule,
+    MatDialogModule,
   ]
 })
 export class SharedModule { }

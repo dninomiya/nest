@@ -17,6 +17,14 @@ const routes: Routes = [
     loadChildren: './training/training.module#TrainingModule'
   },
   {
+    path: 'help',
+    loadChildren: './help/help.module#HelpModule'
+  },
+  {
+    path: 'login',
+    loadChildren: './login/login.module#LoginModule'
+  },
+  {
     path: '**',
     pathMatch: 'full',
     component: NotFoundComponent

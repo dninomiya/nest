@@ -5,6 +5,7 @@
 .profile {
   display: flex;
   align-items: center;
+  margin-bottom: 24px;
   &__body {
     padding: 0 15px;
   }
@@ -34,4 +35,54 @@
   left: 15px;
   right: 15px;
   bottom: 15px;
+}
+
+.edit-button {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+}
+
+.profile-list {
+  padding-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  mat-list-item {
+    width: 50%;
+    box-sizing: border-box;
+  }
+}
+
+.works {
+  display: flex;
+  overflow: scroll;
+}
+
+.work {
+  text-align: center;
+  width: 180px;
+  margin-left: 24px;
+  &:first-child {
+    margin-left: 0;
+  }
+  &__thumbnail {
+    margin: 0;
+    width: 180px;
+    height: 180px;
+    background: center/cover no-repeat;
+    border-radius: 8px;
+  }
+  &__title {
+    margin: 10px 0 5px;
+    width: 100%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+  &__date {
+    font-size: 12px;
+    color: #999;
+    margin: 0;
+    line-height: 1;
+  }
 }

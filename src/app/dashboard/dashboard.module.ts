@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { DashboardRoutingModule } from './dashboard-routing/dashboard-routing.module';
 import { NestDashboardComponent } from './nest-dashboard/nest-dashboard.component';
 import { SharedModule } from '../shared/shared.module';
+import { RankDialogComponent } from './rank-dialog/rank-dialog.component';
 
 @NgModule({
   imports: [
@@ -12,7 +13,11 @@ import { SharedModule } from '../shared/shared.module';
     SharedModule
   ],
   declarations: [
-    NestDashboardComponent
+    NestDashboardComponent,
+    RankDialogComponent
+  ],
+  entryComponents: [
+    RankDialogComponent
   ]
 })
 export class DashboardModule { }

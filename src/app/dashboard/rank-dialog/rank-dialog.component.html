@@ -1,0 +1,27 @@
+<h2 mat-dialog-title>ランクと報酬</h2>
+<mat-dialog-content>
+  <p>ランクが上がれば上がるほど、Update Worksの報酬が上がります。</p>
+
+  <table mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="rank">
+      <th mat-header-cell *matHeaderCellDef>ランク</th>
+      <td mat-cell *matCellDef="let element"> {{element.rank}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="day">
+      <th mat-header-cell *matHeaderCellDef>日単価</th>
+      <td mat-cell *matCellDef="let element"> {{element.day}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="month">
+      <th mat-header-cell *matHeaderCellDef>月単価</th>
+      <td mat-cell *matCellDef="let element"> {{element.month}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>

@@ -14,25 +14,29 @@
         <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" *ngIf="isHandset$ | async">
           <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
         </button>
-        <a routerLink="" class="logo">Nest</a>
+        <button mat-button routerLink="">Nest</button>
         <span class="spacer"></span>
         <div *ngIf="!(isHandset$ | async)">
           <button mat-button routerLink="">ダッシュボード</button>
           <button mat-button routerLink="users">ユーザー</button>
           <button mat-button routerLink="training">トレーニング</button>
           <button mat-icon-button [matMenuTriggerFor]="menu">
-              <mat-icon>more_vert</mat-icon>
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu" [overlapTrigger]="false">
+            <button mat-menu-item routerLink="users">
+              <mat-icon>account_circle</mat-icon>
+              <span>マイページ</span>
             </button>
-            <mat-menu #menu="matMenu" [overlapTrigger]="false">
-              <button mat-menu-item routerLink="mypage">
-                <mat-icon>account_circle</mat-icon>
-                <span>マイページ</span>
-              </button>
-              <button mat-menu-item>
-                <mat-icon>exit_to_app</mat-icon>
-                <span>ログアウト</span>
-              </button>
-            </mat-menu>
+            <button mat-menu-item routerLink="help">
+              <mat-icon>help</mat-icon>
+              <span>ヘルプ</span>
+            </button>
+            <button mat-menu-item>
+              <mat-icon>exit_to_app</mat-icon>
+              <span>ログアウト</span>
+            </button>
+          </mat-menu>
         </div>
       </mat-toolbar-row>
     </mat-toolbar>

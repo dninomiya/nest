@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material';
+import { RankDialogComponent } from '../rank-dialog/rank-dialog.component';
 
 @Component({
   selector: 'nest-dashboard',
@@ -6,10 +8,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./nest-dashboard.component.scss']
 })
 export class NestDashboardComponent {
-  cards = [
-    { title: 'Card 1', cols: 2, rows: 1 },
-    { title: 'Card 2', cols: 1, rows: 1 },
-    { title: 'Card 3', cols: 1, rows: 2 },
-    { title: 'Card 4', cols: 1, rows: 1 }
-  ];
+  constructor(private dialog: MatDialog) { }
+
+  openRankDialog(): void {
+    const dialogRef = this.dialog.open(RankDialogComponent, {
+      width: '600px'
+    });
+  }
 }

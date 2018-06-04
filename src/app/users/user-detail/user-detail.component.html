@@ -3,7 +3,12 @@
     <mat-grid-tile [colspan]="1" [rowspan]="1">
       <mat-card class="card">
         <mat-card-header>
-          <mat-card-title>プロフィール</mat-card-title>
+          <mat-card-title>
+            プロフィール
+            <button mat-icon-button class="edit-button">
+              <mat-icon>edit</mat-icon>
+            </button>
+          </mat-card-title>
         </mat-card-header>
         <mat-card-content>
           <div class="profile">
@@ -13,13 +18,38 @@
               <p class="profile__type">{{user.type || 'タイプ未設定'}}</p>
             </div>
           </div>
+          <mat-divider></mat-divider>
+          <mat-list dense class="profile-list">
+            <mat-list-item>
+              <mat-icon matListIcon>phone</mat-icon>
+              <p matLine>070-4444-4444 <mat-icon [inline]="true" matTooltip="自分と応募企業以外に公開されることはありません。">lock</mat-icon></p>
+            </mat-list-item>
+            <mat-list-item>
+              <mat-icon matListIcon>mail</mat-icon>
+              <p matLine>xxx@gmail.com</p>
+            </mat-list-item>
+            <mat-list-item>
+              <mat-icon matListIcon>color_lens</mat-icon>
+              <p matLine>xxx@gmail.com</p>
+            </mat-list-item>
+            <mat-list-item>
+              <mat-icon matListIcon>code</mat-icon>
+              <p matLine>deerboy</p>
+            </mat-list-item>
+          </mat-list>
+
         </mat-card-content>
       </mat-card>
     </mat-grid-tile>
     <mat-grid-tile [colspan]="1" [rowspan]="1">
       <mat-card class="card">
         <mat-card-header>
-          <mat-card-title>スキル</mat-card-title>
+          <mat-card-title>
+            スキル
+            <button mat-icon-button class="edit-button">
+              <mat-icon>edit</mat-icon>
+            </button>
+          </mat-card-title>
         </mat-card-header>
         <mat-card-content>
 
@@ -29,56 +59,103 @@
     <mat-grid-tile [colspan]="2" [rowspan]="1">
       <mat-card class="card">
         <mat-card-header>
-          <mat-card-title>実績</mat-card-title>
+          <mat-card-title>
+            実績
+            <button mat-icon-button class="edit-button">
+              <mat-icon>edit</mat-icon>
+            </button>
+          </mat-card-title>
         </mat-card-header>
         <mat-card-content>
-
+          <div class="works">
+            <div class="work">
+              <figure class="work__thumbnail" [style.background-image]="'url(http://www.designyourway.net/diverse/5/coolwebsites/music-incubator_eu.jpg)'"></figure>
+              <p class="work__title">Webサイト制作Webサイト制作Webサイト制作</p>
+              <p class="work__date">2018.4</p>
+            </div>
+            <div class="work">
+                <figure class="work__thumbnail" [style.background-image]="'url(http://www.designyourway.net/diverse/5/coolwebsites/music-incubator_eu.jpg)'"></figure>
+                <p class="work__title">Webサイト制作Webサイト制作Webサイト制作</p>
+                <p class="work__date">2018.4</p>
+              </div>
+              <div class="work">
+                  <figure class="work__thumbnail" [style.background-image]="'url(http://www.designyourway.net/diverse/5/coolwebsites/music-incubator_eu.jpg)'"></figure>
+                  <p class="work__title">Webサイト制作Webサイト制作Webサイト制作</p>
+                  <p class="work__date">2018.4</p>
+                </div>
+                <div class="work">
+                    <figure class="work__thumbnail" [style.background-image]="'url(http://www.designyourway.net/diverse/5/coolwebsites/music-incubator_eu.jpg)'"></figure>
+                    <p class="work__title">Webサイト制作Webサイト制作Webサイト制作</p>
+                    <p class="work__date">2018.4</p>
+                  </div>
+                  <div class="work">
+                      <figure class="work__thumbnail" [style.background-image]="'url(http://www.designyourway.net/diverse/5/coolwebsites/music-incubator_eu.jpg)'"></figure>
+                      <p class="work__title">Webサイト制作Webサイト制作Webサイト制作</p>
+                      <p class="work__date">2018.4</p>
+                    </div>
+                    <div class="work">
+                        <figure class="work__thumbnail" [style.background-image]="'url(http://www.designyourway.net/diverse/5/coolwebsites/music-incubator_eu.jpg)'"></figure>
+                        <p class="work__title">Webサイト制作Webサイト制作Webサイト制作</p>
+                        <p class="work__date">2018.4</p>
+                      </div>
+                      <div class="work">
+                          <figure class="work__thumbnail" [style.background-image]="'url(http://www.designyourway.net/diverse/5/coolwebsites/music-incubator_eu.jpg)'"></figure>
+                          <p class="work__title">Webサイト制作Webサイト制作Webサイト制作</p>
+                          <p class="work__date">2018.4</p>
+                        </div>
+          </div>
         </mat-card-content>
       </mat-card>
     </mat-grid-tile>
     <mat-grid-tile [colspan]="1" [rowspan]="2">
       <mat-card class="card">
         <mat-card-header>
-          <mat-card-title>職歴</mat-card-title>
+          <mat-card-title>
+            職歴
+            <button mat-icon-button class="edit-button">
+              <mat-icon>edit</mat-icon>
+            </button>
+          </mat-card-title>
+          <mat-icon [inline]="true" matTooltip="自分と応募企業以外に公開されることはありません。">lock</mat-icon>
         </mat-card-header>
         <mat-card-content>
-
+          <mat-list dense>
+            <mat-list-item>
+              <p matLine>2018.4</p>
+              <p matLine>Lorem ipsum dolor sit amet consectetur.</p>
+            </mat-list-item>
+          </mat-list>
         </mat-card-content>
       </mat-card>
     </mat-grid-tile>
     <mat-grid-tile [colspan]="1" [rowspan]="2">
       <mat-card class="card">
         <mat-card-header>
-          <mat-card-title>学歴</mat-card-title>
+          <mat-card-title>
+            学歴
+            <button mat-icon-button class="edit-button">
+              <mat-icon>edit</mat-icon>
+            </button>
+          </mat-card-title>
+          <mat-icon [inline]="true" matTooltip="自分と応募企業以外に公開されることはありません。">lock</mat-icon>
         </mat-card-header>
         <mat-card-content>
-
+          <mat-list dense>
+            <mat-list-item>
+              <p matLine>2018.4</p>
+              <p matLine>Lorem ipsum dolor sit amet consectetur.</p>
+            </mat-list-item>
+            <mat-list-item>
+              <p matLine>2018.4</p>
+              <p matLine>Lorem ipsum dolor sit amet consectetur.</p>
+            </mat-list-item>
+            <mat-list-item>
+              <p matLine>2018.4</p>
+              <p matLine>Lorem ipsum dolor sit amet consectetur.</p>
+            </mat-list-item>
+          </mat-list>
         </mat-card-content>
       </mat-card>
     </mat-grid-tile>
   </mat-grid-list>
 </div>
-
-<mat-card *ngIf="user">
-  <mat-card-content>
-    <mat-tab-group>
-      <mat-tab label="プロフィール">
-        <div class="content">
-          <div class="user-card">
-            <img src="https://avatars.githubusercontent.com/{{user.gitHub}}" alt="" class="user-card__image">
-          </div>
-        </div>
-      </mat-tab>
-      <mat-tab label="実績">
-        <div class="content">
-          <p>実績</p>
-        </div>
-      </mat-tab>
-      <mat-tab label="バッジ">
-        <div class="content">
-          <p>バッジ</p>
-        </div>
-      </mat-tab>
-    </mat-tab-group>
-  </mat-card-content>
-</mat-card>
