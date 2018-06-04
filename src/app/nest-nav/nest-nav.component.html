@@ -23,7 +23,7 @@
           <button mat-icon-button [matMenuTriggerFor]="menu">
               <mat-icon>more_vert</mat-icon>
             </button>
-            <mat-menu #menu="matMenu">
+            <mat-menu #menu="matMenu" [overlapTrigger]="false">
               <button mat-menu-item routerLink="mypage">
                 <mat-icon>account_circle</mat-icon>
                 <span>マイページ</span>

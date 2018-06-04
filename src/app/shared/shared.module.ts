@@ -16,7 +16,9 @@ import {
   MatPaginatorModule,
   MatTabsModule,
   MatBadgeModule,
+  MatChipsModule,
   MatProgressSpinnerModule,
+  MatTooltipModule,
 } from '@angular/material';
 
 @NgModule({
@@ -37,7 +39,9 @@ import {
     MatPaginatorModule,
     MatTabsModule,
     MatBadgeModule,
+    MatChipsModule,
     MatProgressSpinnerModule,
+    MatTooltipModule,
   ],
   declarations: [],
   exports: [
@@ -56,7 +60,9 @@ import {
     MatPaginatorModule,
     MatTabsModule,
     MatBadgeModule,
+    MatChipsModule,
     MatProgressSpinnerModule,
+    MatTooltipModule,
   ]
 })
 export class SharedModule { }

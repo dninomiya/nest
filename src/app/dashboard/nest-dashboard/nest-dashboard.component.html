@@ -11,8 +11,8 @@
             <p class="rank-hint">次のランクまであと
               <strong>X</strong>ポイント</p>
             <div class="prices">
-              <p class="price">10,000円/日</p>
-              <p class="price">20,000円/月</p>
+              <p class="price" matTooltip="日給目安">10,000円/日</p>
+              <p class="price" matTooltip="月給目安">20,000円/月</p>
             </div>
           </div>
         </mat-card-content>
@@ -25,11 +25,71 @@
           <mat-card-title>Todo</mat-card-title>
         </mat-card-header>
         <mat-card-content class="dashboard-card-content">
-          <mat-selection-list>
-            <mat-list-option><span>「BEM」を終了させましょう。<span class="point">20</span></span></mat-list-option>
-            <mat-list-option><span>プロフィールを入力しましょう。<span class="point">10</span></span></mat-list-option>
-            <mat-list-option><span>デイリーレポートを送信する。<span class="point">10</span></span></mat-list-option>
+          <mat-selection-list dense>
+            <mat-list-option>
+              <span>プロフィールを入力する
+                <span class="point">10</span>
+              </span>
+            </mat-list-option>
+            <mat-list-option>
+              <span>デイリーレポートを送信する
+                <span class="point">10</span>
+              </span>
+            </mat-list-option>
+            <mat-list-option>
+              <span>「BEM」をクリアする
+                <span class="point">20</span>
+              </span>
+            </mat-list-option>
+            <mat-list-option>
+              <span>勉強会を主催する
+                <span class="point">20</span>
+              </span>
+            </mat-list-option>
+            <mat-list-option>
+              <span>テストに合格する
+                <span class="point">120</span>
+              </span>
+            </mat-list-option>
           </mat-selection-list>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-card class="dashboard-card">
+        <mat-card-header>
+          <mat-card-title>News</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="dashboard-card-content">
+          <mat-list dense>
+            <mat-list-item>
+              <span matLine>2018.4.5</span>
+              <p matLine>トレーニングに「React Native」が追加されました。</p>
+            </mat-list-item>
+            <mat-list-item>
+              <span matLine>2018.4.5</span>
+              <p matLine>トレーニングに「React Native」が追加されました。</p>
+            </mat-list-item>
+            <mat-list-item>
+              <span matLine>2018.4.5</span>
+              <p matLine>トレーニングに「React Native」が追加されました。</p>
+            </mat-list-item>
+          </mat-list>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-card class="dashboard-card">
+        <mat-card-header>
+          <mat-card-title>Note</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="dashboard-card-content">
+          <mat-list dense>
+            <mat-list-item>何もしないと毎日ポイントが減っていきます。</mat-list-item>
+            <mat-list-item>何もしないと毎日ポイントが減っていく</mat-list-item>
+          </mat-list>
         </mat-card-content>
       </mat-card>
     </mat-grid-tile>
@@ -37,17 +97,9 @@
     <mat-grid-tile [colspan]="2" [rowspan]="1">
       <mat-card class="dashboard-card">
         <mat-card-header>
-          <mat-card-title>Team</mat-card-title>
+          <mat-card-title>イベント</mat-card-title>
         </mat-card-header>
         <mat-card-content class="dashboard-card-content">
-          <div class="rank-wrap">
-            <div class="rank">
-              <p class="rank__label">A</p>
-              <mat-progress-spinner color="" class="rank__progress" [value]="70"></mat-progress-spinner>
-            </div>
-            <p class="rank-hint">次のランクまであと
-              <strong>X</strong>ポイント</p>
-          </div>
         </mat-card-content>
       </mat-card>
     </mat-grid-tile>
