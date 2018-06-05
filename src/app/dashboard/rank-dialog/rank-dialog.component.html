@@ -1,6 +1,6 @@
 <h2 mat-dialog-title>ランクと報酬</h2>
 <mat-dialog-content>
-  <p>ランクが上がれば上がるほど、Update Worksの報酬が上がります。</p>
+  <p>ランクが上がれば上がるほど、Update Worksの報酬が上がります。Todoをこなしたり、トレーニングをクリアすることでポイントがたまり、ランクテストを受けられるようになります。ランクテストに合格するとランクアップします。</p>
 
   <table mat-table [dataSource]="dataSource">
     <ng-container matColumnDef="rank">
@@ -21,6 +21,8 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
+
+  <p>非活性な状態が続くとポイントが減っていくので、コンスタントなトレーニングを心がけましょう。</p>
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-button mat-dialog-close>Close</button>
