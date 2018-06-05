@@ -90,4 +90,14 @@ export class UserService {
   updateUser(uid: string, data) {
     this.db.doc(`users/${uid}`).set(data, { merge: true });
   }
+
+  updateUserExperiences(uid: string, data) {
+    this.db
+      .collection('users')
+      .doc(uid)
+      .collection('private')
+      .doc('experience')
+      .set(data, { merge: true });
+  }
 }
+

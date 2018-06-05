@@ -97,7 +97,7 @@ export class ExperienceEditDialogComponent implements OnInit {
           description: experience.description,
         };
       });
-      this.userService.updateUser(this.data.uid, data);
+      this.userService.updateUserExperiences(this.data.uid, data);
       this.dialogRef.close();
     }
   }
