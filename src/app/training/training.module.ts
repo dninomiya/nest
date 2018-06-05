@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 
 import { TrainingRoutingModule } from './training-routing.module';
 import { TrainingComponent } from './training/training.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
-    TrainingRoutingModule
+    TrainingRoutingModule,
+    SharedModule
   ],
   declarations: [TrainingComponent]
 })

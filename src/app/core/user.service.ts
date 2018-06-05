@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 import { AngularFirestore } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
+import { LoadingService } from './loading.service';
 
 export interface User {
   uid: string;
@@ -43,14 +44,18 @@ export const MockUsers: User[] = [
 export class UserService {
 
   constructor(
-    private db: AngularFirestore
+    private db: AngularFirestore,
+    private loadingService: LoadingService
   ) { }
 
   getUser(gitHub: string): Observable<User> {
+    this.loadingService.pageLoadingSource.next(true);
+
     return this.db
       .collection<User>('users', ref => ref.where('gitHub', '==', gitHub))
       .valueChanges()
       .pipe(
+        tap(users => this.loadingService.pageLoadingSource.next(false)),
         map(users => users[0])
       );
   }

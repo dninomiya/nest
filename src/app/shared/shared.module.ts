@@ -21,6 +21,7 @@ import {
   MatTooltipModule,
   MatExpansionModule,
   MatDialogModule,
+  MatProgressBarModule,
 } from '@angular/material';
 
 @NgModule({
@@ -46,6 +47,7 @@ import {
     MatTooltipModule,
     MatExpansionModule,
     MatDialogModule,
+    MatProgressBarModule,
   ],
   declarations: [],
   exports: [
@@ -69,6 +71,7 @@ import {
     MatTooltipModule,
     MatExpansionModule,
     MatDialogModule,
+    MatProgressBarModule,
   ]
 })
 export class SharedModule { }
