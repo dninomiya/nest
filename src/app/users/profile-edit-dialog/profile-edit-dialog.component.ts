@@ -2,7 +2,8 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MAT_DATE_LOCALE, DateAdapter, MAT_DATE_FORMATS } from '@angular/material';
 import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
-import { UserService, userTypes } from '../../core/user.service';
+import { UserService, UserTypes } from '../../core/user.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'nest-profile-edit-dialog',
@@ -17,7 +18,7 @@ import { UserService, userTypes } from '../../core/user.service';
 export class ProfileEditDialogComponent implements OnInit {
 
   form: FormGroup;
-  userTypes = userTypes;
+  userTypes = UserTypes;
 
   constructor(
     private fb: FormBuilder,
@@ -46,14 +47,16 @@ export class ProfileEditDialogComponent implements OnInit {
       tel: [privatedata ? privatedata.tel : null, Validators.required],
       email: [privatedata ? privatedata.email : null, Validators.required],
       adobe: [privatedata ? privatedata.adobe : null],
-      bday: [privatedata ? privatedata.bday : null, Validators.required],
+      bday: [privatedata ? moment(privatedata.bday) : null, Validators.required],
       gender: [privatedata ? privatedata.gender : null, Validators.required],
     });
   }
 
   onSubmit() {
     if (this.form.valid) {
-      this.userService.updateUser(this.data.uid, this.form.value);
+      const data = Object.assign({}, this.form.value);
+      data.private.bday = data.private.bday.toString();
+      this.userService.updateUser(this.data.uid, data);
     }
   }
 

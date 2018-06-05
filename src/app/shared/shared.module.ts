@@ -29,6 +29,8 @@ import {
   MatNativeDateModule,
 } from '@angular/material';
 
+import { UserTypePipe } from './user-type.pipe';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -59,7 +61,7 @@ import {
     MatDatepickerModule,
     MatNativeDateModule,
   ],
-  declarations: [],
+  declarations: [UserTypePipe],
   exports: [
     ReactiveFormsModule,
     MatToolbarModule,
@@ -87,6 +89,7 @@ import {
     MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    UserTypePipe
   ]
 })
 export class SharedModule { }

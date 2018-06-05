@@ -14,7 +14,7 @@ export interface User {
   private?: {};
 }
 
-export const userTypes = [
+export const UserTypes = [
   {
     id: 'front',
     label: 'フロントエンドエンジニア'

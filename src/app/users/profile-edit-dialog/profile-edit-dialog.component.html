@@ -1,5 +1,5 @@
 <form *ngIf="form" [formGroup]="form" (ngSubmit)="onSubmit()">
-  <mat-select placeholder="タイプ">
+  <mat-select placeholder="タイプ" formControlName="type">
     <mat-option>未設定</mat-option>
     <mat-option *ngFor="let type of userTypes" [value]="type.id">
       {{ type.label }}

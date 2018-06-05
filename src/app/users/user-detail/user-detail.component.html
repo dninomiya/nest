@@ -15,20 +15,20 @@
             <img src="https://avatars.githubusercontent.com/{{user.gitHub}}" alt="" class="profile__image">
             <div class="profile__body">
               <p class="profile__name">{{user.gitHub}}</p>
-              <p class="profile__type">{{user.type || 'タイプ未設定'}}</p>
+              <p class="profile__type">{{(user.type | userType) || 'タイプ未設定'}}</p>
             </div>
           </div>
           <mat-divider></mat-divider>
           <mat-list dense class="profile-list">
             <mat-list-item>
               <mat-icon matListIcon>phone</mat-icon>
-              <p matLine>{{user.private?.phone || '未設定'}}
+              <p matLine>{{user.private?.tel || '未設定'}}
                 <mat-icon [inline]="true" matTooltip="自分と応募企業以外に公開されることはありません。">lock</mat-icon>
               </p>
             </mat-list-item>
             <mat-list-item>
               <mat-icon matListIcon>mail</mat-icon>
-              <p matLine>{{user.private?.mail || '未設定'}}</p>
+              <p matLine>{{user.private?.email || '未設定'}}</p>
             </mat-list-item>
             <mat-list-item>
               <mat-icon matListIcon>color_lens</mat-icon>
