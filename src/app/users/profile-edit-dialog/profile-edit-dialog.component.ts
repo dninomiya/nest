@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA, MAT_DATE_LOCALE, DateAdapter, MAT_DATE_FORMATS } from '@angular/material';
+import { MAT_DIALOG_DATA, MAT_DATE_LOCALE, DateAdapter, MAT_DATE_FORMATS, MatDialogRef } from '@angular/material';
 import { MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-moment-adapter';
 import { UserService, UserTypes } from '../../core/user.service';
 import * as moment from 'moment';
@@ -23,6 +23,7 @@ export class ProfileEditDialogComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
+    public dialogRef: MatDialogRef<ProfileEditDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     if (data && data.uid) {
@@ -57,7 +58,8 @@ export class ProfileEditDialogComponent implements OnInit {
       const data = Object.assign({}, this.form.value);
       data.private.bday = data.private.bday.toString();
       this.userService.updateUser(this.data.uid, data);
+
+      this.dialogRef.close();
     }
   }
-
 }

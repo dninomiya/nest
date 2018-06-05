@@ -36,7 +36,7 @@ export class UserDetailComponent implements OnInit {
 
   openExperienceEditDialog() {
     const dialogRef = this.dialog.open(ExperienceEditDialogComponent, {
-      width: '600px',
+      width: '800px',
       data: {
         uid: this.user.uid
       }

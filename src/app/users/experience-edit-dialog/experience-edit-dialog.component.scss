@@ -1,7 +1,15 @@
+form {
+  font-size: 12px;
+}
+
 .month-picker .mat-calendar-period-button {
   pointer-events: none;
 }
 
 .month-picker .mat-calendar-arrow {
   display: none;
+}
+
+.textarea {
+  width: 100%;
 }

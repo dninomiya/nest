@@ -54,7 +54,7 @@ export class ExperienceEditDialogComponent implements OnInit {
   }
 
   chosenYearHandler(normalizedYear: Moment, ctrl: FormControl) {
-    const ctrlValue = ctrl.value;
+    const ctrlValue = (ctrl.value && ctrl.value.year) ? ctrl.value : moment();
     ctrlValue.year(normalizedYear.year());
     ctrl.setValue(ctrlValue);
   }
@@ -100,6 +100,19 @@ export class ExperienceEditDialogComponent implements OnInit {
       this.userService.updateUser(this.data.uid, data);
       this.dialogRef.close();
     }
+  }
+
+  removeCtrl(index) {
+    this.experiences.removeAt(index);
+  }
+
+  addExperience() {
+    this.experiences.push(this.fb.group({
+      start: [moment(), Validators.required],
+      end: [moment(), Validators.required],
+      name: [null, Validators.required],
+      description: [null, Validators.required],
+    }));
   }
 
 }
