@@ -1,13 +1,18 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA, MAT_DATE_LOCALE } from '@angular/material';
+import { MAT_DIALOG_DATA, MAT_DATE_LOCALE, DateAdapter, MAT_DATE_FORMATS } from '@angular/material';
+import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
 import { UserService, userTypes } from '../../core/user.service';
 
 @Component({
   selector: 'nest-profile-edit-dialog',
   templateUrl: './profile-edit-dialog.component.html',
   styleUrls: ['./profile-edit-dialog.component.scss'],
-  providers: [{provide: MAT_DATE_LOCALE, useValue: 'ja-JP'}]
+  providers: [
+    {provide: MAT_DATE_LOCALE, useValue: 'ja-JP'},
+    {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
+    {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
+  ]
 })
 export class ProfileEditDialogComponent implements OnInit {
 

@@ -9,24 +9,27 @@
       </mat-select>
       <div formGroupName="private">
         <mat-form-field class="form-group">
-          <input matInput placeholder="電話番号" formControlName="tel">
+          <input matInput placeholder="電話番号" pattern="0[0-9]{9,10}" formControlName="tel">
         </mat-form-field>
         <mat-form-field class="form-group">
-          <input matInput placeholder="AdobeID" formControlName="adobe">
+          <input matInput placeholder="AdobeID" maxlength="50" formControlName="adobe">
         </mat-form-field>
         <mat-form-field class="form-group">
-          <input matInput placeholder="メール" formControlName="email">
+          <input matInput placeholder="メール" maxlength="50" formControlName="email">
         </mat-form-field>
         <mat-radio-group formControlName="gender" class="form-group form-group--radio">
           <mat-radio-button value="male">男性</mat-radio-button>
           <mat-radio-button value="female">女性</mat-radio-button>
         </mat-radio-group>
         <mat-form-field class="form-group">
-          <input matInput [matDatepicker]="picker" placeholder="Choose a date" formControlName="bday">
+          <input matInput [matDatepicker]="picker" placeholder="生年月日" formControlName="bday">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
       </div>
+      {{form.validate}}
+      <button type="button" mat-button mat-dialog-close>キャンセル</button>
+      <button mat-raised-button color="primary" [disabled]="form.invalid">更新</button>
     </form>
   </mat-card-content>
 </mat-card>
