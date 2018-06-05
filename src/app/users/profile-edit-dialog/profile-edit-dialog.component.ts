@@ -22,12 +22,13 @@ export class ProfileEditDialogComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
-    // @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    // this.userService.getUserByUid(data.uid).subscribe(user => {
-    //   this.createForm(user);
-    // });
-    this.createForm();
+    if (data && data.uid) {
+      this.userService.getUserByUid(data.uid).subscribe(user => {
+        this.createForm(user);
+      });
+    }
   }
 
   ngOnInit() {
@@ -48,6 +49,12 @@ export class ProfileEditDialogComponent implements OnInit {
       bday: [privatedata ? privatedata.bday : null, Validators.required],
       gender: [privatedata ? privatedata.gender : null, Validators.required],
     });
+  }
+
+  onSubmit() {
+    if (this.form.valid) {
+      this.userService.updateUser(this.data.uid, this.form.value);
+    }
   }
 
 }

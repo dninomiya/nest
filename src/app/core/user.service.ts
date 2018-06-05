@@ -86,4 +86,8 @@ export class UserService {
   getUserByUid(uid: string): Observable<User> {
     return this.db.doc<User>(`users/${uid}`).valueChanges();
   }
+
+  updateUser(uid: string, data) {
+    this.db.doc(`users/${uid}`).set(data, { merge: true });
+  }
 }
