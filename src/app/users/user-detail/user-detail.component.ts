@@ -3,6 +3,7 @@ import { UserService, User } from '../../core/user.service';
 import { ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { ProfileEditDialogComponent } from '../profile-edit-dialog/profile-edit-dialog.component';
+import { ExperienceEditDialogComponent } from '../experience-edit-dialog/experience-edit-dialog.component';
 
 @Component({
   selector: 'nest-user-detail',
@@ -26,6 +27,15 @@ export class UserDetailComponent implements OnInit {
 
   openProfileEditDialog() {
     const dialogRef = this.dialog.open(ProfileEditDialogComponent, {
+      width: '600px',
+      data: {
+        uid: this.user.uid
+      }
+    });
+  }
+
+  openExperienceEditDialog() {
+    const dialogRef = this.dialog.open(ExperienceEditDialogComponent, {
       width: '600px',
       data: {
         uid: this.user.uid

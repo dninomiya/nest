@@ -114,7 +114,7 @@
         <mat-card-header>
           <mat-card-title>
             職歴
-            <button mat-icon-button class="edit-button">
+            <button mat-icon-button class="edit-button" (click)="openExperienceEditDialog()">
               <mat-icon>edit</mat-icon>
             </button>
           </mat-card-title>
@@ -122,9 +122,10 @@
         </mat-card-header>
         <mat-card-content>
           <mat-list dense>
-            <mat-list-item>
-              <p matLine>2018.4</p>
-              <p matLine>Lorem ipsum dolor sit amet consectetur.</p>
+            <mat-list-item *ngFor="let experience of user.experiences">
+              <p matLine><strong>{{experience.name}}</strong></p>
+              <p matLine>{{experience.start | date:'yyyy/mm'}} - {{experience.end | date:'yyyy/mm'}}</p>
+              <p matLine>{{experience.description}}</p>
             </mat-list-item>
           </mat-list>
         </mat-card-content>
