@@ -14,6 +14,29 @@ export interface User {
   private?: {};
 }
 
+export const userTypes = [
+  {
+    id: 'front',
+    label: 'フロントエンドエンジニア'
+  },
+  {
+    id: 'server',
+    label: 'サーバーサイドエンジニア'
+  },
+  {
+    id: 'full',
+    label: 'フルスタックエンジニア'
+  },
+  {
+    id: 'native',
+    label: 'ネイティブアプリエンジニア'
+  },
+  {
+    id: 'unity',
+    label: 'Unityエンジニア'
+  }
+];
+
 export const MockUsers: User[] = [
   {
     uid: '111',
@@ -48,7 +71,7 @@ export class UserService {
     private loadingService: LoadingService
   ) { }
 
-  getUser(gitHub: string): Observable<User> {
+  getUserByGitHub(gitHub: string): Observable<User> {
     this.loadingService.pageLoadingSource.next(true);
 
     return this.db
@@ -58,5 +81,9 @@ export class UserService {
         tap(users => this.loadingService.pageLoadingSource.next(false)),
         map(users => users[0])
       );
+  }
+
+  getUserByUid(uid: string): Observable<User> {
+    return this.db.doc<User>(`users/${uid}`).valueChanges();
   }
 }

@@ -25,15 +25,19 @@
             <mat-icon>more_vert</mat-icon>
           </button>
           <mat-menu #menu="matMenu" [overlapTrigger]="false">
-            <button mat-menu-item routerLink="users">
+            <button *ngIf="user$ | async as user" mat-menu-item routerLink="users" routerLink="users/{{user.gitHub}}">
               <mat-icon>account_circle</mat-icon>
               <span>マイページ</span>
+            </button>
+            <button *ngIf="!(user$ | async)" mat-menu-item routerLink="login">
+              <mat-icon>input</mat-icon>
+              <span>ログイン</span>
             </button>
             <button mat-menu-item routerLink="help">
               <mat-icon>help</mat-icon>
               <span>ヘルプ</span>
             </button>
-            <button mat-menu-item>
+            <button *ngIf="user$ | async" mat-menu-item (click)="signOut()">
               <mat-icon>exit_to_app</mat-icon>
               <span>ログアウト</span>
             </button>

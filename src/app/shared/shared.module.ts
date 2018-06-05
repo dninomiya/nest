@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 import {
   MatToolbarModule,
   MatInputModule,
@@ -22,11 +23,16 @@ import {
   MatExpansionModule,
   MatDialogModule,
   MatProgressBarModule,
+  MatRadioModule,
+  MatSelectModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
 } from '@angular/material';
 
 @NgModule({
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     MatToolbarModule,
     MatButtonModule,
     MatSidenavModule,
@@ -48,9 +54,14 @@ import {
     MatExpansionModule,
     MatDialogModule,
     MatProgressBarModule,
+    MatRadioModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   declarations: [],
   exports: [
+    ReactiveFormsModule,
     MatToolbarModule,
     MatButtonModule,
     MatSidenavModule,
@@ -72,6 +83,10 @@ import {
     MatExpansionModule,
     MatDialogModule,
     MatProgressBarModule,
+    MatRadioModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ]
 })
 export class SharedModule { }

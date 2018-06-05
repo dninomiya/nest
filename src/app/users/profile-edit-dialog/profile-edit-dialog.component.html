@@ -1,0 +1,32 @@
+<mat-card>
+  <mat-card-content>
+    <form [formGroup]="form">
+      <mat-select placeholder="タイプ">
+        <mat-option>未設定</mat-option>
+        <mat-option *ngFor="let type of userTypes" [value]="type.id">
+          {{ type.label }}
+        </mat-option>
+      </mat-select>
+      <div formGroupName="private">
+        <mat-form-field class="form-group">
+          <input matInput placeholder="電話番号" formControlName="tel">
+        </mat-form-field>
+        <mat-form-field class="form-group">
+          <input matInput placeholder="AdobeID" formControlName="adobe">
+        </mat-form-field>
+        <mat-form-field class="form-group">
+          <input matInput placeholder="メール" formControlName="email">
+        </mat-form-field>
+        <mat-radio-group formControlName="gender" class="form-group form-group--radio">
+          <mat-radio-button value="male">男性</mat-radio-button>
+          <mat-radio-button value="female">女性</mat-radio-button>
+        </mat-radio-group>
+        <mat-form-field class="form-group">
+          <input matInput [matDatepicker]="picker" placeholder="Choose a date" formControlName="bday">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

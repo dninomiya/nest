@@ -1,3 +1,5 @@
+<nest-profile-edit-dialog></nest-profile-edit-dialog>
+
 <div *ngIf="user" class="grid-container">
   <mat-grid-list cols="2" rowHeight="350px">
     <mat-grid-tile [colspan]="1" [rowspan]="1">
@@ -22,21 +24,21 @@
           <mat-list dense class="profile-list">
             <mat-list-item>
               <mat-icon matListIcon>phone</mat-icon>
-              <p matLine>070-4444-4444
+              <p matLine>{{user.private?.phone || '未設定'}}
                 <mat-icon [inline]="true" matTooltip="自分と応募企業以外に公開されることはありません。">lock</mat-icon>
               </p>
             </mat-list-item>
             <mat-list-item>
               <mat-icon matListIcon>mail</mat-icon>
-              <p matLine>xxx@gmail.com</p>
+              <p matLine>{{user.private?.mail || '未設定'}}</p>
             </mat-list-item>
             <mat-list-item>
               <mat-icon matListIcon>color_lens</mat-icon>
-              <p matLine>xxx@gmail.com</p>
+              <p matLine>{{user.private?.adobe || '未設定'}}</p>
             </mat-list-item>
             <mat-list-item>
               <mat-icon matListIcon>code</mat-icon>
-              <p matLine>deerboy</p>
+              <p matLine>{{user.gitHub || '未設定'}}</p>
             </mat-list-item>
           </mat-list>
 

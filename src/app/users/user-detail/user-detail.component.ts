@@ -15,7 +15,7 @@ export class UserDetailComponent implements OnInit {
     private userService: UserService,
     private route: ActivatedRoute
   ) {
-    userService.getUser(route.snapshot.params.id).subscribe(user => this.user = user);
+    userService.getUserByGitHub(route.snapshot.params.id).subscribe(user => this.user = user);
   }
 
   ngOnInit() {

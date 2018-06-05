@@ -3,6 +3,8 @@ import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/l
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { LoadingService } from '../core/loading.service';
+import { AuthService } from '../core/auth.service';
+import { User } from '../core/user.service';
 
 @Component({
   selector: 'nest-nav',
@@ -11,6 +13,7 @@ import { LoadingService } from '../core/loading.service';
 })
 export class NestNavComponent {
 
+  user$: Observable<User> = this.authService.user$;
   isPageLoading: Observable<boolean> = this.loadingService.isPageLoading$;
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -19,7 +22,12 @@ export class NestNavComponent {
 
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private loadingService: LoadingService
+    private loadingService: LoadingService,
+    private authService: AuthService
   ) { }
+
+  signOut() {
+    this.authService.signOut();
+  }
 
 }
