@@ -20,17 +20,17 @@
           </div>
           <mat-divider></mat-divider>
           <mat-list dense class="profile-list">
-            <mat-list-item>
+            <mat-list-item *ngIf="privateData">
               <mat-icon matListIcon>phone</mat-icon>
               <p matLine>{{user.private?.tel || '未設定'}}
                 <mat-icon [inline]="true" matTooltip="自分と応募企業以外に公開されることはありません。">lock</mat-icon>
               </p>
             </mat-list-item>
-            <mat-list-item>
+            <mat-list-item *ngIf="privateData">
               <mat-icon matListIcon>mail</mat-icon>
               <p matLine>{{user.private?.email || '未設定'}}</p>
             </mat-list-item>
-            <mat-list-item>
+            <mat-list-item *ngIf="privateData">
               <mat-icon matListIcon>color_lens</mat-icon>
               <p matLine>{{user.private?.adobe || '未設定'}}</p>
             </mat-list-item>
@@ -45,16 +45,17 @@
     </mat-grid-tile>
     <mat-grid-tile [colspan]="1" [rowspan]="1">
       <mat-card class="card">
-        <mat-card-header>
-          <mat-card-title>
-            スキル
-            <button mat-icon-button class="edit-button">
-              <mat-icon>edit</mat-icon>
-            </button>
-          </mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-
+        <button mat-icon-button class="help-button" (click)="openRankDialog()">
+          <mat-icon>help</mat-icon>
+        </button>
+        <mat-card-content class="rank-wrap">
+          <div class="rank">
+            <p class="rank__label">A</p>
+            <mat-progress-spinner color="" class="rank__progress" [value]="70"></mat-progress-spinner>
+          </div>
+          <p class="rank-hint">次のランクまであと
+            <strong>X</strong>ポイント</p>
+          <button mat-stroked-button disabled color="primary" *ngIf="(loginUser$ | async)?.uid === user.uid">ランクテストを受ける</button>
         </mat-card-content>
       </mat-card>
     </mat-grid-tile>
@@ -72,44 +73,14 @@
           <div class="works">
             <div class="work" *ngFor="let work of user.works">
               <figure class="work__thumbnail" [style.background-image]="'url(http://www.designyourway.net/diverse/5/coolwebsites/music-incubator_eu.jpg)'"></figure>
-              <p class="work__title">Webサイト制作Webサイト制作Webサイト制作</p>
-              <p class="work__date">2018.4</p>
-            </div>
-            <div class="work">
-              <figure class="work__thumbnail" [style.background-image]="'url(http://www.designyourway.net/diverse/5/coolwebsites/music-incubator_eu.jpg)'"></figure>
-              <p class="work__title">Webサイト制作Webサイト制作Webサイト制作</p>
-              <p class="work__date">2018.4</p>
-            </div>
-            <div class="work">
-              <figure class="work__thumbnail" [style.background-image]="'url(http://www.designyourway.net/diverse/5/coolwebsites/music-incubator_eu.jpg)'"></figure>
-              <p class="work__title">Webサイト制作Webサイト制作Webサイト制作</p>
-              <p class="work__date">2018.4</p>
-            </div>
-            <div class="work">
-              <figure class="work__thumbnail" [style.background-image]="'url(http://www.designyourway.net/diverse/5/coolwebsites/music-incubator_eu.jpg)'"></figure>
-              <p class="work__title">Webサイト制作Webサイト制作Webサイト制作</p>
-              <p class="work__date">2018.4</p>
-            </div>
-            <div class="work">
-              <figure class="work__thumbnail" [style.background-image]="'url(http://www.designyourway.net/diverse/5/coolwebsites/music-incubator_eu.jpg)'"></figure>
-              <p class="work__title">Webサイト制作Webサイト制作Webサイト制作</p>
-              <p class="work__date">2018.4</p>
-            </div>
-            <div class="work">
-              <figure class="work__thumbnail" [style.background-image]="'url(http://www.designyourway.net/diverse/5/coolwebsites/music-incubator_eu.jpg)'"></figure>
-              <p class="work__title">Webサイト制作Webサイト制作Webサイト制作</p>
-              <p class="work__date">2018.4</p>
-            </div>
-            <div class="work">
-              <figure class="work__thumbnail" [style.background-image]="'url(http://www.designyourway.net/diverse/5/coolwebsites/music-incubator_eu.jpg)'"></figure>
-              <p class="work__title">Webサイト制作Webサイト制作Webサイト制作</p>
-              <p class="work__date">2018.4</p>
+              <p class="work__title">{{work.title}}</p>
+              <p class="work__date">{{work.date | date:'yyyy/MM'}}</p>
             </div>
           </div>
         </mat-card-content>
       </mat-card>
     </mat-grid-tile>
-    <mat-grid-tile [colspan]="1" [rowspan]="2">
+    <mat-grid-tile [colspan]="1" [rowspan]="2" *ngIf="privateData">
       <mat-card class="card">
         <mat-card-header>
           <mat-card-title>
@@ -122,8 +93,10 @@
         </mat-card-header>
         <mat-card-content>
           <mat-list dense>
-            <mat-list-item *ngFor="let experience of user.experiences">
-              <p matLine><strong>{{experience.name}}</strong></p>
+            <mat-list-item *ngFor="let experience of privateData.experiences">
+              <p matLine>
+                <strong>{{experience.name}}</strong>
+              </p>
               <p matLine>{{experience.start | date:'yyyy/MM'}} - {{experience.end | date:'yyyy/MM'}}</p>
               <p matLine>{{experience.description}}</p>
             </mat-list-item>
@@ -131,7 +104,7 @@
         </mat-card-content>
       </mat-card>
     </mat-grid-tile>
-    <mat-grid-tile [colspan]="1" [rowspan]="2" *ngIf="privateData">
+    <mat-grid-tile [colspan]="1" [rowspan]="1" *ngIf="privateData">
       <mat-card class="card">
         <mat-card-header>
           <mat-card-title>
@@ -145,11 +118,30 @@
         <mat-card-content>
           <mat-list dense>
             <mat-list-item *ngFor="let education of privateData.educations">
-              <p matLine><strong>{{education.name}}</strong></p>
+              <p matLine>
+                <strong>{{education.name}}</strong>
+              </p>
               <p matLine>{{education.start | date:'yyyy/MM'}} - {{education.end | date:'yyyy/MM'}}</p>
               <p matLine>{{education.description}}</p>
             </mat-list-item>
           </mat-list>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-card class="card">
+        <mat-card-header>
+          <mat-card-title>
+            スキル
+            <button mat-icon-button class="edit-button" (click)="openSkillEditDialog()">
+              <mat-icon>edit</mat-icon>
+            </button>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-chip-list>
+            <mat-chip *ngFor="let skill of skills">{{skill.label}}</mat-chip>
+          </mat-chip-list>
         </mat-card-content>
       </mat-card>
     </mat-grid-tile>
@@ -164,20 +156,20 @@
           </mat-card-title>
         </mat-card-header>
         <mat-card-content>
-            <mat-chip-list>
-                <mat-chip selected="true">リーダー経験者</mat-chip>
-                <mat-chip selected="true">勉強会開催経験者</mat-chip>
-                <mat-chip>顧客折衝経験者</mat-chip>
-                <mat-chip>デザインマスター</mat-chip>
-                <mat-chip>フロントエンドマスター</mat-chip>
-                <mat-chip>コーダーマスター</mat-chip>
-                <mat-chip>サーバーサイドマスター</mat-chip>
-                <mat-chip>安定稼働者</mat-chip>
-                <mat-chip>古株</mat-chip>
-                <mat-chip>ディレクター経験者</mat-chip>
-                <mat-chip>実務経験者</mat-chip>
-                <mat-chip>常駐経験者</mat-chip>
-              </mat-chip-list>
+          <mat-chip-list>
+            <mat-chip selected="true">リーダー経験者</mat-chip>
+            <mat-chip selected="true">勉強会開催経験者</mat-chip>
+            <mat-chip>顧客折衝経験者</mat-chip>
+            <mat-chip>デザインマスター</mat-chip>
+            <mat-chip>フロントエンドマスター</mat-chip>
+            <mat-chip>コーダーマスター</mat-chip>
+            <mat-chip>サーバーサイドマスター</mat-chip>
+            <mat-chip>安定稼働者</mat-chip>
+            <mat-chip>古株</mat-chip>
+            <mat-chip>ディレクター経験者</mat-chip>
+            <mat-chip>実務経験者</mat-chip>
+            <mat-chip>常駐経験者</mat-chip>
+          </mat-chip-list>
         </mat-card-content>
       </mat-card>
     </mat-grid-tile>

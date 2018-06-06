@@ -10,10 +10,6 @@ form {
   display: none;
 }
 
-.textarea {
-  width: 100%;
-}
-
 .ctrl-group {
   border: 1px solid #ddd;
   padding: 16px;
@@ -42,7 +38,7 @@ form {
 }
 
 .dialog-actions {
-  text-align: center;
+  text-align: right;
   margin: 48px 0 0;
   button + button {
     margin-left: 16px;

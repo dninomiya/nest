@@ -27,9 +27,11 @@ import {
   MatSelectModule,
   MatDatepickerModule,
   MatNativeDateModule,
+  MatCheckboxModule,
 } from '@angular/material';
 
 import { UserTypePipe } from './user-type.pipe';
+import { RankDialogComponent } from './rank-dialog/rank-dialog.component';
 
 @NgModule({
   imports: [
@@ -60,8 +62,12 @@ import { UserTypePipe } from './user-type.pipe';
     MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatCheckboxModule,
   ],
-  declarations: [UserTypePipe],
+  declarations: [
+    UserTypePipe,
+    RankDialogComponent
+  ],
   exports: [
     ReactiveFormsModule,
     MatToolbarModule,
@@ -89,7 +95,12 @@ import { UserTypePipe } from './user-type.pipe';
     MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    UserTypePipe
+    MatCheckboxModule,
+    UserTypePipe,
+    RankDialogComponent
+  ],
+  entryComponents: [
+    RankDialogComponent
   ]
 })
 export class SharedModule { }

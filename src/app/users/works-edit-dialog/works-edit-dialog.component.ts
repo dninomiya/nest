@@ -44,7 +44,7 @@ export class WorksEditDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     if (data && data.uid) {
-      this.userService.getUserProfileByUid(data.uid, 'works').subscribe(user => {
+      this.userService.getUserByUid(data.uid).subscribe(user => {
         this.createForm(user);
       });
     }
@@ -95,7 +95,7 @@ export class WorksEditDialogComponent implements OnInit {
           description: works.description,
         };
       });
-      this.userService.updateUserWorks(this.data.uid, data);
+      this.userService.updateUser(this.data.uid, data);
       this.dialogRef.close();
     }
   }

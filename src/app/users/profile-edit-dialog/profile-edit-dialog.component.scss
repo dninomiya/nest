@@ -1,6 +1,9 @@
+@import "form-dialog";
+
 .form-group {
   display: block;
   &--radio {
+    margin: 16px 0;
     > * {
       margin-right: 10px;
     }

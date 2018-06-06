@@ -1,29 +1,33 @@
 <form *ngIf="form" [formGroup]="form" (ngSubmit)="onSubmit()">
   <div formArrayName="works">
-    <div *ngFor="let work of works.controls; index as i" class="form-array-item">
+    <div *ngFor="let work of works.controls; index as i" class="ctrl-group">
       <div [formGroupName]="i">
         <mat-form-field>
           <input matInput placeholder="title" formControlName="title">
         </mat-form-field>
-        <mat-form-field>
+        <mat-form-field class="ctrl-group__date">
           <input matInput [matDatepicker]="dp" placeholder="開始" formControlName="date">
           <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
           <mat-datepicker #dp startView="multi-year" (yearSelected)="chosenYearHandler($event, work.controls.date)" (monthSelected)="chosenMonthHandler($event, dp, work.controls.date)"
             panelClass="month-picker">
           </mat-datepicker>
         </mat-form-field>
-        <mat-form-field class="textarea">
+        <mat-form-field class="ctrl-group__textarea">
           <textarea matInput placeholder="概要" formControlName="description"></textarea>
         </mat-form-field>
       </div>
-      <button mat-icon-button type="button" (click)="removeCtrl(i)">
+      <button mat-icon-button type="button" (click)="removeCtrl(i)" class="ctrl-group__action">
         <mat-icon>remove_circle_outline</mat-icon>
       </button>
     </div>
-    <button mat-button type="button" (click)="addCtrl()">
-      <mat-icon>add</mat-icon>
-    </button>
+    <div class="ctrl-group-add">
+      <button mat-mini-fab type="button" (click)="addCtrl()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
   </div>
-  <button type="button" mat-button mat-dialog-close>キャンセル</button>
-  <button mat-raised-button color="primary" [disabled]="form.invalid">更新</button>
+  <div class="dialog-actions">
+    <button type="button" mat-button mat-dialog-close>キャンセル</button>
+    <button mat-raised-button color="primary" [disabled]="form.invalid">更新</button>
+  </div>
 </form>

@@ -1,3 +1,40 @@
-<p>
-  skill-edit-dialog works!
-</p>
+<form *ngIf="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div formGroupName="skills">
+    <mat-tab-group dynamicHeight>
+      <mat-tab label="基本スキル">
+        <div formArrayName="basic" class="skills">
+          <mat-checkbox *ngFor="let ctrl of basicCtrls.controls; index as i" [formControlName]="i">{{skillModel.basic[i].label}}</mat-checkbox>
+        </div>
+      </mat-tab>
+      <mat-tab label="フロントエンド">
+        <div formArrayName="front" class="skills">
+          <mat-checkbox *ngFor="let ctrl of frontCtrls.controls; index as i" [formControlName]="i">{{skillModel.front[i].label}}</mat-checkbox>
+        </div>
+      </mat-tab>
+      <mat-tab label="バックエンド">
+        <div formArrayName="back" class="skills">
+          <mat-checkbox *ngFor="let ctrl of backCtrls.controls; index as i" [formControlName]="i">{{skillModel.back[i].label}}</mat-checkbox>
+        </div>
+      </mat-tab>
+      <mat-tab label="マネジメント">
+        <div formArrayName="management" class="skills">
+          <mat-checkbox *ngFor="let ctrl of managementCtrls.controls; index as i" [formControlName]="i">{{skillModel.management[i].label}}</mat-checkbox>
+        </div>
+      </mat-tab>
+      <mat-tab label="デザイン">
+        <div formArrayName="design" class="skills">
+          <mat-checkbox *ngFor="let ctrl of designCtrls.controls; index as i" [formControlName]="i">{{skillModel.design[i].label}}</mat-checkbox>
+        </div>
+      </mat-tab>
+      <mat-tab label="データ">
+        <div formArrayName="data" class="skills">
+          <mat-checkbox *ngFor="let ctrl of dataCtrls.controls; index as i" [formControlName]="i">{{skillModel.data[i].label}}</mat-checkbox>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+  <div class="dialog-actions">
+    <button type="button" mat-button mat-dialog-close>キャンセル</button>
+    <button mat-raised-button color="primary" [disabled]="form.invalid">アップデート</button>
+  </div>
+</form>

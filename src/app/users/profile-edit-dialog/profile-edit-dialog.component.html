@@ -26,6 +26,8 @@
     </mat-form-field>
   </div>
   {{form.validate}}
-  <button type="button" mat-button mat-dialog-close>キャンセル</button>
-  <button mat-raised-button color="primary" [disabled]="form.invalid">更新</button>
+  <div class="dialog-actions">
+    <button type="button" mat-button mat-dialog-close>キャンセル</button>
+    <button mat-raised-button color="primary" [disabled]="form.invalid">更新</button>
+  </div>
 </form>

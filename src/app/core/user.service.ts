@@ -97,7 +97,7 @@ export class UserService {
 
     return this.getUidByGitHub(gitHub).pipe(
       switchMap(uid => {
-        if (this.uid === uid || this.user.admin) {
+        if (this.uid === uid || (this.user && this.user.admin)) {
           return this.getFullUserByUid(uid);
         } else {
           return this.getUserByUid(uid).pipe(
@@ -160,15 +160,6 @@ export class UserService {
       .doc(uid)
       .collection('private')
       .doc('educations')
-      .set(data, { merge: true });
-  }
-
-  updateUserWorks(uid: string, data) {
-    this.db
-      .collection('users')
-      .doc(uid)
-      .collection('private')
-      .doc('works')
       .set(data, { merge: true });
   }
 

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { RankDialogComponent } from '../rank-dialog/rank-dialog.component';
+import { RankDialogComponent } from '../../shared/rank-dialog/rank-dialog.component';
 
 @Component({
   selector: 'nest-dashboard',
