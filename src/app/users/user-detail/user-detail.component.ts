@@ -34,6 +34,7 @@ export class UserDetailComponent implements OnInit {
   openProfileEditDialog() {
     const dialogRef = this.dialog.open(ProfileEditDialogComponent, {
       width: '600px',
+      panelClass: 'nest-panel',
       data: {
         uid: this.user.uid
       }
@@ -43,6 +44,7 @@ export class UserDetailComponent implements OnInit {
   openExperienceEditDialog() {
     const dialogRef = this.dialog.open(ExperienceEditDialogComponent, {
       width: '800px',
+      panelClass: 'nest-panel',
       data: {
         uid: this.user.uid
       }
@@ -52,6 +54,7 @@ export class UserDetailComponent implements OnInit {
   openEducationEditDialog() {
     const dialogRef = this.dialog.open(EducationEditDialogComponent, {
       width: '800px',
+      panelClass: 'nest-panel',
       data: {
         uid: this.user.uid
       }
@@ -61,6 +64,7 @@ export class UserDetailComponent implements OnInit {
   openWorkEditDialog() {
     const dialogRef = this.dialog.open(WorksEditDialogComponent, {
       width: '800px',
+      panelClass: 'nest-panel',
       data: {
         uid: this.user.uid
       }

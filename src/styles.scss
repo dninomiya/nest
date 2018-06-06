@@ -1,5 +1,12 @@
-
 body {
   margin: 0;
   color: #333333;
+}
+
+.nest-panel {
+  .mat-dialog-container {
+    border-radius: 8px;
+    padding: 64px;
+    overflow: hidden;
+  }
 }

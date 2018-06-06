@@ -13,7 +13,7 @@ import { User, UserService } from '../core/user.service';
 })
 export class NestNavComponent {
 
-  user$: Observable<User> = this.userService.user$;
+  user$: Observable<User> = this.authService.user$;
   isPageLoading: Observable<boolean> = this.loadingService.isPageLoading$;
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(

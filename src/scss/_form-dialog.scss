@@ -1,0 +1,50 @@
+form {
+  font-size: 12px;
+}
+
+.month-picker .mat-calendar-period-button {
+  pointer-events: none;
+}
+
+.month-picker .mat-calendar-arrow {
+  display: none;
+}
+
+.textarea {
+  width: 100%;
+}
+
+.ctrl-group {
+  border: 1px solid #ddd;
+  padding: 16px;
+  margin-bottom: 8px;
+  border-radius: 3px;
+  display: flex;
+  position: relative;
+  flex-wrap: wrap;
+  &__date {
+    width: 100px;
+    margin-left: 16px;
+  }
+  &__textarea {
+    width: 100%;
+  }
+  &__action {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}
+
+.ctrl-group-add {
+  text-align: center;
+  margin: 16px 0;
+}
+
+.dialog-actions {
+  text-align: center;
+  margin: 48px 0 0;
+  button + button {
+    margin-left: 16px;
+  }
+}

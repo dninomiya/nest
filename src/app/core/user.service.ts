@@ -76,7 +76,6 @@ export const MockUsers: User[] = [
 export class UserService {
 
   user: User;
-  user$: Observable<User>;
   uid: string;
 
   constructor(
@@ -179,7 +178,6 @@ export class UserService {
 
   setUser(user: User) {
     this.user = user;
-    this.user$ = this.getUserByUid(user.uid);
   }
 }
 
