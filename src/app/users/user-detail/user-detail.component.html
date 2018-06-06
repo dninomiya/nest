@@ -63,14 +63,14 @@
         <mat-card-header>
           <mat-card-title>
             実績
-            <button mat-icon-button class="edit-button">
+            <button mat-icon-button class="edit-button" (click)="openWorkEditDialog()">
               <mat-icon>edit</mat-icon>
             </button>
           </mat-card-title>
         </mat-card-header>
         <mat-card-content>
           <div class="works">
-            <div class="work">
+            <div class="work" *ngFor="let work of user.works">
               <figure class="work__thumbnail" [style.background-image]="'url(http://www.designyourway.net/diverse/5/coolwebsites/music-incubator_eu.jpg)'"></figure>
               <p class="work__title">Webサイト制作Webサイト制作Webサイト制作</p>
               <p class="work__date">2018.4</p>
@@ -124,19 +124,19 @@
           <mat-list dense>
             <mat-list-item *ngFor="let experience of user.experiences">
               <p matLine><strong>{{experience.name}}</strong></p>
-              <p matLine>{{experience.start | date:'yyyy/mm'}} - {{experience.end | date:'yyyy/mm'}}</p>
+              <p matLine>{{experience.start | date:'yyyy/MM'}} - {{experience.end | date:'yyyy/MM'}}</p>
               <p matLine>{{experience.description}}</p>
             </mat-list-item>
           </mat-list>
         </mat-card-content>
       </mat-card>
     </mat-grid-tile>
-    <mat-grid-tile [colspan]="1" [rowspan]="2">
+    <mat-grid-tile [colspan]="1" [rowspan]="2" *ngIf="privateData">
       <mat-card class="card">
         <mat-card-header>
           <mat-card-title>
             学歴
-            <button mat-icon-button class="edit-button">
+            <button mat-icon-button class="edit-button" (click)="openEducationEditDialog()">
               <mat-icon>edit</mat-icon>
             </button>
           </mat-card-title>
@@ -144,17 +144,10 @@
         </mat-card-header>
         <mat-card-content>
           <mat-list dense>
-            <mat-list-item>
-              <p matLine>2018.4</p>
-              <p matLine>Lorem ipsum dolor sit amet consectetur.</p>
-            </mat-list-item>
-            <mat-list-item>
-              <p matLine>2018.4</p>
-              <p matLine>Lorem ipsum dolor sit amet consectetur.</p>
-            </mat-list-item>
-            <mat-list-item>
-              <p matLine>2018.4</p>
-              <p matLine>Lorem ipsum dolor sit amet consectetur.</p>
+            <mat-list-item *ngFor="let education of privateData.educations">
+              <p matLine><strong>{{education.name}}</strong></p>
+              <p matLine>{{education.start | date:'yyyy/MM'}} - {{education.end | date:'yyyy/MM'}}</p>
+              <p matLine>{{education.description}}</p>
             </mat-list-item>
           </mat-list>
         </mat-card-content>

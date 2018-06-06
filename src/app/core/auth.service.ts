@@ -11,23 +11,18 @@ import { UserService, User } from './user.service';
 export class AuthService {
 
   isLoggedIn: boolean;
-  user$: Observable<User>;
 
   constructor(
     private afAuth: AngularFireAuth,
     private userService: UserService
   ) {
-    this.user$ = afAuth.authState.pipe(
+    afAuth.authState.pipe(
       switchMap(afUser => {
-        if (afUser) {
-          return this.userService.getUserByUid(afUser.uid);
-        } else {
-          return of(null);
-        }
-      })
-    );
-
-    this.user$.subscribe(user => {
+        this.userService.setUid(afUser ? afUser.uid : null);
+        return this.userService.getUserByUid(afUser.uid);
+      }),
+      tap(user => this.userService.setUser(user))
+    ).subscribe(user => {
       this.isLoggedIn = !!user;
     });
   }

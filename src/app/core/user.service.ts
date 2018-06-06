@@ -1,17 +1,23 @@
 import { Injectable } from '@angular/core';
-import { map, tap } from 'rxjs/operators';
+import { map, tap, zip, switchMap } from 'rxjs/operators';
 
 import { AngularFirestore } from 'angularfire2/firestore';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { LoadingService } from './loading.service';
 
 export interface User {
+  admin: boolean;
   uid: string;
   gitHub: string;
   status: string;
   rank: string;
   type: string;
   private?: {};
+}
+
+export interface UserDataSet {
+  publicData: User;
+  privateData?: any;
 }
 
 export const UserTypes = [
@@ -39,6 +45,7 @@ export const UserTypes = [
 
 export const MockUsers: User[] = [
   {
+    admin: true,
     uid: '111',
     type: 'フルスタック',
     gitHub: 'deerboy',
@@ -46,6 +53,7 @@ export const MockUsers: User[] = [
     rank: 'A'
   },
   {
+    admin: false,
     uid: '222',
     type: 'フロントエンド',
     gitHub: 'iwamotoW',
@@ -53,6 +61,7 @@ export const MockUsers: User[] = [
     rank: 'B'
   },
   {
+    admin: false,
     uid: '333',
     type: 'フロントエンド',
     gitHub: 'yuFuji',
@@ -66,25 +75,71 @@ export const MockUsers: User[] = [
 })
 export class UserService {
 
+  user: User;
+  user$: Observable<User>;
+  uid: string;
+
   constructor(
     private db: AngularFirestore,
     private loadingService: LoadingService
   ) { }
 
-  getUserByGitHub(gitHub: string): Observable<User> {
-    this.loadingService.pageLoadingSource.next(true);
-
+  getUidByGitHub(gitHub: string): Observable<string> {
     return this.db
       .collection<User>('users', ref => ref.where('gitHub', '==', gitHub))
       .valueChanges()
       .pipe(
-        tap(users => this.loadingService.pageLoadingSource.next(false)),
-        map(users => users[0])
+        map(users => users[0].uid)
       );
+  }
+
+  getUserByGitHub(gitHub: string): Observable<UserDataSet> {
+    this.loadingService.pageLoadingSource.next(true);
+
+    return this.getUidByGitHub(gitHub).pipe(
+      switchMap(uid => {
+        if (this.uid === uid || this.user.admin) {
+          return this.getFullUserByUid(uid);
+        } else {
+          return this.getUserByUid(uid).pipe(
+            map(user => {
+              return {
+                publicData: user
+              };
+            })
+          );
+        }
+      }),
+      tap(user => this.loadingService.pageLoadingSource.next(false))
+    );
+  }
+
+  getFullUserByUid(uid: string): Observable<UserDataSet> {
+    return this.getUserByUid(uid).pipe(
+      zip(
+        this.db.collection(`users/${uid}/private`).valueChanges(),
+        (publicData, privateCollection) => {
+          let privateData = {};
+
+          privateCollection.forEach(item => {
+            privateData = Object.assign(privateData, item);
+          });
+
+          return {
+            publicData: publicData,
+            privateData: privateData,
+          };
+        }
+      )
+    );
   }
 
   getUserByUid(uid: string): Observable<User> {
     return this.db.doc<User>(`users/${uid}`).valueChanges();
+  }
+
+  getUserProfileByUid(uid: string, doc: string): Observable<{}> {
+    return this.db.doc(`users/${uid}/private/${doc}`).valueChanges();
   }
 
   updateUser(uid: string, data) {
@@ -98,6 +153,33 @@ export class UserService {
       .collection('private')
       .doc('experience')
       .set(data, { merge: true });
+  }
+
+  updateUserEducations(uid: string, data) {
+    this.db
+      .collection('users')
+      .doc(uid)
+      .collection('private')
+      .doc('educations')
+      .set(data, { merge: true });
+  }
+
+  updateUserWorks(uid: string, data) {
+    this.db
+      .collection('users')
+      .doc(uid)
+      .collection('private')
+      .doc('works')
+      .set(data, { merge: true });
+  }
+
+  setUid(uid: string) {
+    this.uid = uid;
+  }
+
+  setUser(user: User) {
+    this.user = user;
+    this.user$ = this.getUserByUid(user.uid);
   }
 }
 

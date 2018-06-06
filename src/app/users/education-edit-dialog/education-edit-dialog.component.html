@@ -1,3 +1,40 @@
-<p>
-  education-edit-dialog works!
-</p>
+<form *ngIf="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div formArrayName="educations">
+      <div *ngFor="let education of educations.controls; index as i" class="form-array-item">
+        <div [formGroupName]="i">
+          <mat-form-field>
+            <input matInput placeholder="学校名" formControlName="name">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput [matDatepicker]="startDp" placeholder="開始" formControlName="start">
+            <mat-datepicker-toggle matSuffix [for]="startDp"></mat-datepicker-toggle>
+            <mat-datepicker
+              #startDp
+              startView="multi-year"
+              (yearSelected)="chosenYearHandler($event, education.controls.start)"
+              (monthSelected)="chosenMonthHandler($event, startDp, education.controls.start)"
+              panelClass="month-picker">
+            </mat-datepicker>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput [matDatepicker]="endDp" placeholder="終了" formControlName="end">
+            <mat-datepicker-toggle matSuffix [for]="endDp"></mat-datepicker-toggle>
+            <mat-datepicker
+              #endDp
+              startView="multi-year"
+              (yearSelected)="chosenYearHandler($event, education.controls.end)"
+              (monthSelected)="chosenMonthHandler($event, endDp, education.controls.end)"
+              panelClass="month-picker">
+            </mat-datepicker>
+          </mat-form-field>
+          <mat-form-field class="textarea">
+            <textarea matInput placeholder="概要" formControlName="description"></textarea>
+          </mat-form-field>
+        </div>
+        <button mat-icon-button type="button" (click)="removeCtrl(i)"><mat-icon>delete</mat-icon></button>
+      </div>
+      <button mat-button type="button" (click)="addCtrl()"><mat-icon>add</mat-icon></button>
+    </div>
+    <button type="button" mat-button mat-dialog-close>キャンセル</button>
+    <button mat-raised-button color="primary" [disabled]="form.invalid">更新</button>
+  </form>

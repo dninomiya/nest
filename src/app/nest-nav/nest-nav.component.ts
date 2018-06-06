@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { LoadingService } from '../core/loading.service';
 import { AuthService } from '../core/auth.service';
-import { User } from '../core/user.service';
+import { User, UserService } from '../core/user.service';
 
 @Component({
   selector: 'nest-nav',
@@ -13,7 +13,7 @@ import { User } from '../core/user.service';
 })
 export class NestNavComponent {
 
-  user$: Observable<User> = this.authService.user$;
+  user$: Observable<User> = this.userService.user$;
   isPageLoading: Observable<boolean> = this.loadingService.isPageLoading$;
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -23,7 +23,8 @@ export class NestNavComponent {
   constructor(
     private breakpointObserver: BreakpointObserver,
     private loadingService: LoadingService,
-    private authService: AuthService
+    private authService: AuthService,
+    private userService: UserService,
   ) { }
 
   signOut() {

@@ -1,3 +1,29 @@
-<p>
-  works-edit-dialog works!
-</p>
+<form *ngIf="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div formArrayName="works">
+    <div *ngFor="let work of works.controls; index as i" class="form-array-item">
+      <div [formGroupName]="i">
+        <mat-form-field>
+          <input matInput placeholder="title" formControlName="title">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput [matDatepicker]="dp" placeholder="開始" formControlName="date">
+          <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+          <mat-datepicker #dp startView="multi-year" (yearSelected)="chosenYearHandler($event, work.controls.date)" (monthSelected)="chosenMonthHandler($event, dp, work.controls.date)"
+            panelClass="month-picker">
+          </mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="textarea">
+          <textarea matInput placeholder="概要" formControlName="description"></textarea>
+        </mat-form-field>
+      </div>
+      <button mat-icon-button type="button" (click)="removeCtrl(i)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+    <button mat-button type="button" (click)="addCtrl()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+  <button type="button" mat-button mat-dialog-close>キャンセル</button>
+  <button mat-raised-button color="primary" [disabled]="form.invalid">更新</button>
+</form>
