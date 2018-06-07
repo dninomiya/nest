@@ -6,7 +6,7 @@ import { ProfileEditDialogComponent } from '../profile-edit-dialog/profile-edit-
 import { ExperienceEditDialogComponent } from '../experience-edit-dialog/experience-edit-dialog.component';
 import { EducationEditDialogComponent } from '../education-edit-dialog/education-edit-dialog.component';
 import { WorksEditDialogComponent } from '../works-edit-dialog/works-edit-dialog.component';
-import { Skills } from '../../core/skills.model';
+import { Skills, SkillsModel } from '../../core/skills.model';
 import { AuthService } from '../../core/auth.service';
 import { RankDialogComponent } from '../../shared/rank-dialog/rank-dialog.component';
 import { SkillEditDialogComponent } from '../skill-edit-dialog/skill-edit-dialog.component';
@@ -22,6 +22,8 @@ export class UserDetailComponent implements OnInit {
   privateData: any;
   skills = Skills;
   loginUser$ = this.authService.user$;
+  notFound: boolean;
+  skillModel = SkillsModel;
 
   constructor(
     private userService: UserService,
@@ -32,6 +34,7 @@ export class UserDetailComponent implements OnInit {
     userService.getUserByGitHub(route.snapshot.params.id).subscribe(userData => {
       this.user = userData.publicData;
       this.privateData = userData.privateData;
+      this.notFound = !this.user;
     });
   }
 

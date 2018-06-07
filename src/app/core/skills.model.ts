@@ -20,8 +20,28 @@ export const Skills = [
     type: 'front'
   },
   {
+    id: 'ajax',
+    label: 'Ajax',
+    type: 'front'
+  },
+  {
     id: 'windows',
     label: 'Windows',
+    type: 'basic'
+  },
+  {
+    id: 'docker',
+    label: 'Docker',
+    type: 'basic'
+  },
+  {
+    id: 'unix',
+    label: 'UNIXコマンド',
+    type: 'basic'
+  },
+  {
+    id: 'cui',
+    label: 'ターミナル/コマンドプロンプト',
     type: 'basic'
   },
   {
@@ -47,17 +67,32 @@ export const Skills = [
   {
     id: 'swift',
     label: 'Swift',
-    type: 'front'
+    type: 'native'
+  },
+  {
+    id: 'kotlin',
+    label: 'Kotln',
+    type: 'native'
   },
   {
     id: 'mysql',
     label: 'MySQL',
-    type: 'front'
+    type: 'back'
+  },
+  {
+    id: 'aws',
+    label: 'AWS',
+    type: 'back'
+  },
+  {
+    id: 'gcp',
+    label: 'Google CloudP latform',
+    type: 'back'
   },
   {
     id: 'mongodb',
     label: 'MongoDB',
-    type: 'front'
+    type: 'back'
   },
   {
     id: 'gulp',
@@ -145,6 +180,31 @@ export const Skills = [
     type: 'management'
   },
   {
+    id: 'psd_slice',
+    label: 'PSDのコーディング起こし',
+    type: 'front'
+  },
+  {
+    id: 'react',
+    label: 'React',
+    type: 'front'
+  },
+  {
+    id: 'vue',
+    label: 'Vue',
+    type: 'front'
+  },
+  {
+    id: 'angular',
+    label: 'Angular',
+    type: 'front'
+  },
+  {
+    id: 'jquery',
+    label: 'jQuery',
+    type: 'front'
+  },
+  {
     id: 'project_manager',
     label: 'プロジェクトマネージャー',
     type: 'management'
@@ -165,8 +225,8 @@ export const Skills = [
     type: 'data'
   },
   {
-    id: 'ses',
-    label: 'SESアナリティクス',
+    id: 'gtm',
+    label: 'GoogleTagManager',
     type: 'data'
   },
   {
@@ -175,8 +235,26 @@ export const Skills = [
     type: 'data'
   },
   {
+    id: 'sns',
+    label: 'SNSマーケティング',
+    type: 'data'
+  },
+  {
     id: 'ab',
     label: 'ABテスト',
     type: 'data'
   },
 ];
+
+export const SkillsModel = (() => {
+  const types = Skills
+    .map(skill => skill.type)
+    .filter((type, index, self) => self.indexOf(type) === index);
+
+  const result = {};
+  types.forEach(type => {
+    result[type] = Skills.filter(skill => skill.type === type);
+  });
+
+  return result;
+})();

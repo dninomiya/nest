@@ -76,12 +76,45 @@ export class SkillEditDialogComponent implements OnInit {
   }
 
   buildSkillCtrls(user, type: string) {
-    return this.skills.filter(skill => skill.type === type).map(skill => {
-      return user.skills.includes(skill);
-    });
+    if (user && user.skills) {
+      return this.skillModel[type].map(skill => this.fb.control(user.skills.includes(skill.id)));
+    } else {
+      return this.skillModel[type].map(skill => this.fb.control(false));
+    }
   }
 
   ngOnInit() {
+  }
+
+  convertFormDataToSubmitData() {
+    const base = JSON.parse(JSON.stringify(this.form.value.skills));
+    let result = [];
+
+    for (const type in base) {
+      if (type) {
+        base[type] = base[type].map((status, i) => {
+          if (status) {
+            return this.skillModel[type][i].id;
+          } else {
+            return null;
+          }
+        }).filter(item => item);
+
+        result = result.concat(base[type]);
+      }
+    }
+
+    return result;
+  }
+
+  onSubmit() {
+    if (this.form.valid) {
+      this.userService.updateUser(
+        this.data.uid,
+        { skills: this.convertFormDataToSubmitData() }
+      );
+    }
+    this.dialogRef.close();
   }
 
 }

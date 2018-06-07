@@ -32,6 +32,7 @@ import {
 
 import { UserTypePipe } from './user-type.pipe';
 import { RankDialogComponent } from './rank-dialog/rank-dialog.component';
+import { SkillLabelPipe } from './skill-label.pipe';
 
 @NgModule({
   imports: [
@@ -66,7 +67,8 @@ import { RankDialogComponent } from './rank-dialog/rank-dialog.component';
   ],
   declarations: [
     UserTypePipe,
-    RankDialogComponent
+    RankDialogComponent,
+    SkillLabelPipe
   ],
   exports: [
     ReactiveFormsModule,
@@ -97,7 +99,8 @@ import { RankDialogComponent } from './rank-dialog/rank-dialog.component';
     MatNativeDateModule,
     MatCheckboxModule,
     UserTypePipe,
-    RankDialogComponent
+    RankDialogComponent,
+    SkillLabelPipe,
   ],
   entryComponents: [
     RankDialogComponent

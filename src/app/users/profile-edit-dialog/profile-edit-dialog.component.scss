@@ -2,8 +2,9 @@
 
 .form-group {
   display: block;
+  margin: 16px 0;
   &--radio {
-    margin: 16px 0;
+    padding-bottom: 1.25em;
     > * {
       margin-right: 10px;
     }

@@ -88,7 +88,7 @@ export class UserService {
       .collection<User>('users', ref => ref.where('gitHub', '==', gitHub))
       .valueChanges()
       .pipe(
-        map(users => users[0].uid)
+        map(users => users[0] ? users[0].uid : null)
       );
   }
 

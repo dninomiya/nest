@@ -5,7 +5,7 @@
         <mat-card-header>
           <mat-card-title>
             プロフィール
-            <button mat-icon-button class="edit-button" (click)="openProfileEditDialog()">
+            <button mat-icon-button class="edit-button" (click)="openProfileEditDialog()" *ngIf="privateData">
               <mat-icon>edit</mat-icon>
             </button>
           </mat-card-title>
@@ -19,12 +19,24 @@
             </div>
           </div>
           <mat-divider></mat-divider>
-          <mat-list dense class="profile-list">
+          <p class="profile-description">{{user.profile}}</p>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1" *ngIf="privateData">
+      <mat-card class="card">
+        <mat-card-header>
+          <mat-card-title>
+            コンタクト
+          </mat-card-title>
+          <mat-icon [inline]="true" matTooltip="自分と応募企業以外に公開されることはありません。">lock</mat-icon>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-list dense>
             <mat-list-item *ngIf="privateData">
               <mat-icon matListIcon>phone</mat-icon>
-              <p matLine>{{user.private?.tel || '未設定'}}
-                <mat-icon [inline]="true" matTooltip="自分と応募企業以外に公開されることはありません。">lock</mat-icon>
-              </p>
+              <p matLine>{{user.private?.tel || '未設定'}}</p>
             </mat-list-item>
             <mat-list-item *ngIf="privateData">
               <mat-icon matListIcon>mail</mat-icon>
@@ -39,32 +51,16 @@
               <p matLine>{{user.gitHub || '未設定'}}</p>
             </mat-list-item>
           </mat-list>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
 
-        </mat-card-content>
-      </mat-card>
-    </mat-grid-tile>
-    <mat-grid-tile [colspan]="1" [rowspan]="1">
-      <mat-card class="card">
-        <button mat-icon-button class="help-button" (click)="openRankDialog()">
-          <mat-icon>help</mat-icon>
-        </button>
-        <mat-card-content class="rank-wrap">
-          <div class="rank">
-            <p class="rank__label">A</p>
-            <mat-progress-spinner color="" class="rank__progress" [value]="70"></mat-progress-spinner>
-          </div>
-          <p class="rank-hint">次のランクまであと
-            <strong>X</strong>ポイント</p>
-          <button mat-stroked-button disabled color="primary" *ngIf="(loginUser$ | async)?.uid === user.uid">ランクテストを受ける</button>
-        </mat-card-content>
-      </mat-card>
-    </mat-grid-tile>
     <mat-grid-tile [colspan]="2" [rowspan]="1">
       <mat-card class="card">
         <mat-card-header>
           <mat-card-title>
             実績
-            <button mat-icon-button class="edit-button" (click)="openWorkEditDialog()">
+            <button mat-icon-button class="edit-button" (click)="openWorkEditDialog()" *ngIf="privateData">
               <mat-icon>edit</mat-icon>
             </button>
           </mat-card-title>
@@ -85,7 +81,7 @@
         <mat-card-header>
           <mat-card-title>
             職歴
-            <button mat-icon-button class="edit-button" (click)="openExperienceEditDialog()">
+            <button mat-icon-button class="edit-button" (click)="openExperienceEditDialog()" *ngIf="privateData">
               <mat-icon>edit</mat-icon>
             </button>
           </mat-card-title>
@@ -109,7 +105,7 @@
         <mat-card-header>
           <mat-card-title>
             学歴
-            <button mat-icon-button class="edit-button" (click)="openEducationEditDialog()">
+            <button mat-icon-button class="edit-button" (click)="openEducationEditDialog()" *ngIf="privateData">
               <mat-icon>edit</mat-icon>
             </button>
           </mat-card-title>
@@ -130,17 +126,33 @@
     </mat-grid-tile>
     <mat-grid-tile [colspan]="1" [rowspan]="1">
       <mat-card class="card">
+        <button mat-icon-button class="help-button" (click)="openRankDialog()">
+          <mat-icon>help</mat-icon>
+        </button>
+        <mat-card-content class="rank-wrap">
+          <div class="rank">
+            <p class="rank__label">A</p>
+            <mat-progress-spinner color="" class="rank__progress" [value]="70"></mat-progress-spinner>
+          </div>
+          <p class="rank-hint">次のランクまであと
+            <strong>X</strong>ポイント</p>
+          <button mat-stroked-button disabled color="primary" *ngIf="(loginUser$ | async)?.uid === user.uid">ランクテストを受ける</button>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="2" [rowspan]="1">
+      <mat-card class="card">
         <mat-card-header>
           <mat-card-title>
             スキル
-            <button mat-icon-button class="edit-button" (click)="openSkillEditDialog()">
+            <button mat-icon-button class="edit-button" (click)="openSkillEditDialog()" *ngIf="privateData">
               <mat-icon>edit</mat-icon>
             </button>
           </mat-card-title>
         </mat-card-header>
         <mat-card-content>
           <mat-chip-list>
-            <mat-chip *ngFor="let skill of skills">{{skill.label}}</mat-chip>
+            <mat-chip *ngFor="let skill of user.skills">{{skill | skillLabel}}</mat-chip>
           </mat-chip-list>
         </mat-card-content>
       </mat-card>
@@ -174,4 +186,8 @@
       </mat-card>
     </mat-grid-tile>
   </mat-grid-list>
+</div>
+
+<div *ngIf="notFound">
+  <p>notfoundser.</p>
 </div>
