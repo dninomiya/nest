@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { map, tap, zip, switchMap } from 'rxjs/operators';
+import { map, tap, zip, switchMap, combineLatest } from 'rxjs/operators';
 
 import { AngularFirestore } from 'angularfire2/firestore';
 import { Observable, of } from 'rxjs';
@@ -85,7 +85,7 @@ export class UserService {
 
   getUidByGitHub(gitHub: string): Observable<string> {
     return this.db
-      .collection<User>('users', ref => ref.where('gitHub', '==', gitHub))
+      .collection<User>('test_users', ref => ref.where('gitHub', '==', gitHub))
       .valueChanges()
       .pipe(
         map(users => users[0] ? users[0].uid : null)
@@ -115,8 +115,8 @@ export class UserService {
 
   getFullUserByUid(uid: string): Observable<UserDataSet> {
     return this.getUserByUid(uid).pipe(
-      zip(
-        this.db.collection(`users/${uid}/private`).valueChanges(),
+      combineLatest(
+        this.db.collection(`test_users/${uid}/private`).valueChanges(),
         (publicData, privateCollection) => {
           let privateData = {};
 
@@ -134,20 +134,20 @@ export class UserService {
   }
 
   getUserByUid(uid: string): Observable<User> {
-    return this.db.doc<User>(`users/${uid}`).valueChanges();
+    return this.db.doc<User>(`test_users/${uid}`).valueChanges();
   }
 
-  getUserProfileByUid(uid: string, doc: string): Observable<{}> {
-    return this.db.doc(`users/${uid}/private/${doc}`).valueChanges();
+  getUserPrivateByUid(uid: string, doc: string): Observable<{}> {
+    return this.db.doc(`test_users/${uid}/private/${doc}`).valueChanges();
   }
 
   updateUser(uid: string, data) {
-    this.db.doc(`users/${uid}`).set(data, { merge: true });
+    this.db.doc(`test_users/${uid}`).set(data, { merge: true });
   }
 
   updateUserExperiences(uid: string, data) {
     this.db
-      .collection('users')
+      .collection('test_users')
       .doc(uid)
       .collection('private')
       .doc('experience')
@@ -156,10 +156,19 @@ export class UserService {
 
   updateUserEducations(uid: string, data) {
     this.db
-      .collection('users')
+      .collection('test_users')
       .doc(uid)
       .collection('private')
       .doc('educations')
+      .set(data, { merge: true });
+  }
+
+  updateUserProfile(uid: string, data) {
+    this.db
+      .collection('test_users')
+      .doc(uid)
+      .collection('private')
+      .doc('profile')
       .set(data, { merge: true });
   }
 
@@ -170,5 +179,24 @@ export class UserService {
   setUser(user: User) {
     this.user = user;
   }
+
+  registerUser(afUser) {
+    this.db.doc(`test_users/${afUser.uid}/private/profile`).set({
+      email: afUser.email
+    });
+
+    return this.db.doc(`test_users/${afUser.uid}`).set({
+      uid: afUser.uid,
+      gitHub: afUser.providerData[0].uid,
+      photoURL: afUser.photoURL
+    }, { merge: true });
+  }
+
+  // checkUserNotTaken(userName) {
+  //   this.db
+  //     .collection('test_users', ref => ref.where('userName', '==', userName))
+  //     .valueChanges()
+  //     .map(users => users)
+  // }
 }
 

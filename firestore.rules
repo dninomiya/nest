@@ -18,6 +18,15 @@ service cloud.firestore {
       }
     }
 
+    match /test_users/{user} {
+      allow read, create: if true;
+      allow update, delete: if isAdmin() || isOwner();
+      match /private/{key} {
+        allow read, create: if isAdmin() || isOwner();
+        allow update, delete: if isAdmin() || isOwner();
+      }
+    }
+
     match /jobs/{job} {
       allow read: if true;
       allow write: if isAdmin();

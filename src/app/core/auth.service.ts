@@ -15,6 +15,7 @@ export class AuthService {
   user$: Observable<User>;
   isLoggedIn: boolean;
   redirectUrl: string;
+  afUser;
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -24,6 +25,7 @@ export class AuthService {
   ) {
     this.user$ = afAuth.authState.pipe(
       switchMap(afUser => {
+        this.afUser = afUser;
         if (afUser) {
           this.userService.setUid(afUser ? afUser.uid : null);
           return this.userService.getUserByUid(afUser.uid);
@@ -38,8 +40,13 @@ export class AuthService {
 
     this.user$.subscribe(user => {
       this.isLoggedIn = !!user;
-      if (this.redirectUrl && this.isLoggedIn) {
-        this.router.navigateByUrl(this.redirectUrl);
+      if (this.isLoggedIn) {
+        if (this.redirectUrl) {
+          this.router.navigateByUrl(this.redirectUrl);
+        }
+      } else if (this.afUser) {
+        this.userService.registerUser(this.afUser)
+          .then(res => this.router.navigate(['users', this.afUser.gitHub]));
       } else {
         this.router.navigate(['/login']);
       }

@@ -44,7 +44,7 @@ export class ExperienceEditDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     if (data && data.uid) {
-      this.userService.getUserByUid(data.uid).subscribe(user => {
+      this.userService.getUserPrivateByUid(data.uid, 'experience').subscribe(user => {
         this.createForm(user);
       });
     }
@@ -67,7 +67,7 @@ export class ExperienceEditDialogComponent implements OnInit {
   }
 
   createForm(user) {
-    const items = user.experiences || [];
+    const items = user.experiences[0] ? user.experiences : [{}];
     this.form = this.fb.group({
       experiences: this.fb.array(
         items.map(item => {

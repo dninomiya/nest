@@ -44,7 +44,7 @@ export class EducationEditDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     if (data && data.uid) {
-      this.userService.getUserByUid(data.uid).subscribe(user => {
+      this.userService.getUserPrivateByUid(data.uid, 'educations').subscribe(user => {
         this.createForm(user);
       });
     }
@@ -67,13 +67,13 @@ export class EducationEditDialogComponent implements OnInit {
   }
 
   createForm(user) {
-    const items = user.educations || [];
+    const items = user.educations[0] ? user.educations : [{}];
     this.form = this.fb.group({
       educations: this.fb.array(
         items.map(item => {
           return this.fb.group({
-            start: [item ? moment(item.start) : moment(), Validators.required],
-            end: [item ? moment(item.end) : moment(), Validators.required],
+            start: [item ? moment(new Date(item.start)) : moment(), Validators.required],
+            end: [item ? moment(new Date(item.end)) : moment(), Validators.required],
             name: [item ? item.name : null, Validators.required],
             description: [item ? item.description : null, Validators.required],
           });

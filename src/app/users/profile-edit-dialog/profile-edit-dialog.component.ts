@@ -27,7 +27,7 @@ export class ProfileEditDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     if (data && data.uid) {
-      this.userService.getUserByUid(data.uid).subscribe(user => {
+      this.userService.getFullUserByUid(data.uid).subscribe(user => {
         this.createForm(user);
       });
     }
@@ -37,9 +37,12 @@ export class ProfileEditDialogComponent implements OnInit {
   }
 
   createForm(user?) {
+    const publicData = user.publicData;
+    const privateData = user.privateData;
+
     this.form = this.fb.group({
-      type: user ? user.type : null,
-      private: this.createPrivateFormGroup(user ? user.private : null)
+      type: publicData ? publicData.type : null,
+      private: this.createPrivateFormGroup(privateData ? privateData : null)
     });
   }
 
@@ -57,8 +60,8 @@ export class ProfileEditDialogComponent implements OnInit {
     if (this.form.valid) {
       const data = Object.assign({}, this.form.value);
       data.private.bday = data.private.bday.toString();
-      this.userService.updateUser(this.data.uid, data);
-
+      this.userService.updateUser(this.data.uid, {type: data.type});
+      this.userService.updateUserProfile(this.data.uid, data.private);
       this.dialogRef.close();
     }
   }

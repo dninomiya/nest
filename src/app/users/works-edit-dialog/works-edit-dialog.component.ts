@@ -67,7 +67,7 @@ export class WorksEditDialogComponent implements OnInit {
   }
 
   createForm(user) {
-    const items = user.works || [];
+    const items = user.works[0] ? user.works : [{}];
     this.form = this.fb.group({
       works: this.fb.array(
         items.map(item => {

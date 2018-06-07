@@ -12,7 +12,7 @@
         </mat-card-header>
         <mat-card-content>
           <div class="profile">
-            <img src="https://avatars.githubusercontent.com/{{user.gitHub}}" alt="" class="profile__image">
+            <img [src]="user.photoURL" alt="" class="profile__image">
             <div class="profile__body">
               <p class="profile__name">{{user.gitHub}}</p>
               <p class="profile__type">{{(user.type | userType) || 'タイプ未設定'}}</p>
@@ -36,15 +36,15 @@
           <mat-list dense>
             <mat-list-item *ngIf="privateData">
               <mat-icon matListIcon>phone</mat-icon>
-              <p matLine>{{user.private?.tel || '未設定'}}</p>
+              <p matLine>{{privateData?.tel || '未設定'}}</p>
             </mat-list-item>
             <mat-list-item *ngIf="privateData">
-              <mat-icon matListIcon>mail</mat-icon>
-              <p matLine>{{user.private?.email || '未設定'}}</p>
+              <mat-icon matListIcon>email</mat-icon>
+              <p matLine>{{privateData?.email || '未設定'}}</p>
             </mat-list-item>
             <mat-list-item *ngIf="privateData">
               <mat-icon matListIcon>color_lens</mat-icon>
-              <p matLine>{{user.private?.adobe || '未設定'}}</p>
+              <p matLine>{{privateData?.adobe || '未設定'}}</p>
             </mat-list-item>
             <mat-list-item>
               <mat-icon matListIcon>code</mat-icon>
