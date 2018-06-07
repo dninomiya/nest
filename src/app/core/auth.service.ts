@@ -5,6 +5,7 @@ import { Observable, of, Subject, BehaviorSubject } from 'rxjs';
 import * as firebase from 'firebase/app';
 import { UserService, User } from './user.service';
 import { Router } from '@angular/router';
+import { LoadingService } from './loading.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,8 @@ export class AuthService {
   constructor(
     private afAuth: AngularFireAuth,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private loadingService: LoadingService
   ) {
     this.user$ = afAuth.authState.pipe(
       switchMap(afUser => {
@@ -32,11 +34,16 @@ export class AuthService {
       tap(user => this.userService.setUser(user))
     );
 
+    this.loadingService.pageLoadingSource.next(true);
+
     this.user$.subscribe(user => {
       this.isLoggedIn = !!user;
-      if (this.redirectUrl) {
+      if (this.redirectUrl && this.isLoggedIn) {
         this.router.navigateByUrl(this.redirectUrl);
+      } else {
+        this.router.navigate(['/login']);
       }
+      this.loadingService.pageLoadingSource.next(false);
     });
   }
 
@@ -46,5 +53,6 @@ export class AuthService {
 
   signOut() {
     this.afAuth.auth.signOut();
+    this.router.navigateByUrl('login');
   }
 }

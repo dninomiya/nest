@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router, Route } from '@angular/router';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router, Route, CanActivateChild, CanLoad } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
+export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
 
   constructor(
     private router: Router,
@@ -36,9 +36,10 @@ export class AuthGuard implements CanActivate {
   checkLogin(url: string) {
     if (this.authService.isLoggedIn) { return true; }
 
-    this.authService.redirectUrl = url;
+    if (url !== '/login') {
+      this.authService.redirectUrl = url;
+    }
 
-    this.router.navigate(['/login']);
     return false;
   }
 }
