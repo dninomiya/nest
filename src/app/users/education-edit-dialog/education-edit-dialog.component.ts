@@ -73,7 +73,7 @@ export class EducationEditDialogComponent implements OnInit {
         items.map(item => {
           return this.fb.group({
             start: [item ? moment(new Date(item.start)) : moment(), Validators.required],
-            end: [item ? moment(new Date(item.end)) : moment(), Validators.required],
+            end: [item ? moment(new Date(item.end)) : moment()],
             name: [item ? item.name : null, Validators.required],
             description: [item ? item.description : null, Validators.required],
           });
@@ -109,7 +109,7 @@ export class EducationEditDialogComponent implements OnInit {
   addCtrl() {
     this.educations.push(this.fb.group({
       start: [moment(), Validators.required],
-      end: [moment(), Validators.required],
+      end: [moment()],
       name: [null, Validators.required],
       description: [null, Validators.required],
     }));

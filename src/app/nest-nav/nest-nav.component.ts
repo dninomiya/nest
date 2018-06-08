@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { LoadingService } from '../core/loading.service';
 import { AuthService } from '../core/auth.service';
 import { User, UserService } from '../core/user.service';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'nest-nav',
@@ -13,6 +14,7 @@ import { User, UserService } from '../core/user.service';
 })
 export class NestNavComponent {
 
+  develop = !environment.production;
   user$: Observable<User> = this.authService.user$;
   isPageLoading: Observable<boolean> = this.loadingService.isPageLoading$;
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)

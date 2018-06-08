@@ -11,7 +11,6 @@ import { UserService } from '../../core/user.service';
 })
 export class LoginComponent implements OnInit {
 
-  afUser = this.authService.afUser;
   form: FormGroup;
 
   constructor(
@@ -33,6 +32,10 @@ export class LoginComponent implements OnInit {
 
   signIn() {
     this.authService.signIn();
+  }
+
+  resetUser() {
+    this.userService.registerUser(this.authService.afUser);
   }
 
   // validateEmailNotTaken(control: AbstractControl) {

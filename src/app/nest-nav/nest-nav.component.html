@@ -17,10 +17,10 @@
         <button mat-button routerLink="">Nest</button>
         <span class="spacer"></span>
         <div *ngIf="!(isHandset$ | async)">
-          <button mat-button routerLink="">ダッシュボード</button>
+          <button mat-button routerLink="" *ngIf="develop">ダッシュボード</button>
           <button mat-button routerLink="users">ユーザー</button>
-          <button mat-button routerLink="training">トレーニング</button>
-          <button mat-button routerLink="jobs">ジョブ</button>
+          <button mat-button routerLink="training" *ngIf="develop">トレーニング</button>
+          <button mat-button routerLink="jobs" *ngIf="develop">ジョブ</button>
           <button mat-icon-button [matMenuTriggerFor]="menu">
             <mat-icon>more_vert</mat-icon>
           </button>

@@ -10,12 +10,14 @@ import { UserService, MockUsers } from '../../core/user.service';
 export class UsersComponent implements OnInit {
 
   displayedColumns = ['gitHub', 'type', 'rank', 'status'];
-  dataSource = new MatTableDataSource(MockUsers);
+  dataSource = new MatTableDataSource();
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService) {
+    this.userService.getUsers().subscribe(users => this.dataSource.data = users);
+  }
 
   ngOnInit() {
     this.dataSource.sort = this.sort;

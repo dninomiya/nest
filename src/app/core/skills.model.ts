@@ -30,6 +30,11 @@ export const Skills = [
     type: 'basic'
   },
   {
+    id: 'typing',
+    label: 'ブラインドタッチ',
+    type: 'basic'
+  },
+  {
     id: 'docker',
     label: 'Docker',
     type: 'basic'

@@ -42,6 +42,7 @@ export class ProfileEditDialogComponent implements OnInit {
 
     this.form = this.fb.group({
       type: publicData ? publicData.type : null,
+      description: publicData ? publicData.description : null,
       private: this.createPrivateFormGroup(privateData ? privateData : null)
     });
   }
@@ -51,7 +52,7 @@ export class ProfileEditDialogComponent implements OnInit {
       tel: [privatedata ? privatedata.tel : null, Validators.required],
       email: [privatedata ? privatedata.email : null, Validators.required],
       adobe: [privatedata ? privatedata.adobe : null],
-      bday: [privatedata ? moment(privatedata.bday) : null, Validators.required],
+      bday: [privatedata ? moment(new Date(privatedata.bday)) : null, Validators.required],
       gender: [privatedata ? privatedata.gender : null, Validators.required],
     });
   }
@@ -60,7 +61,10 @@ export class ProfileEditDialogComponent implements OnInit {
     if (this.form.valid) {
       const data = Object.assign({}, this.form.value);
       data.private.bday = data.private.bday.toString();
-      this.userService.updateUser(this.data.uid, {type: data.type});
+      this.userService.updateUser(this.data.uid, {
+        type: data.type,
+        description: data.description,
+      });
       this.userService.updateUserProfile(this.data.uid, data.private);
       this.dialogRef.close();
     }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UserService, User } from '../../core/user.service';
 import { ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material';
@@ -10,20 +10,24 @@ import { Skills, SkillsModel } from '../../core/skills.model';
 import { AuthService } from '../../core/auth.service';
 import { RankDialogComponent } from '../../shared/rank-dialog/rank-dialog.component';
 import { SkillEditDialogComponent } from '../skill-edit-dialog/skill-edit-dialog.component';
+import { environment } from '../../../environments/environment';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'nest-user-detail',
   templateUrl: './user-detail.component.html',
   styleUrls: ['./user-detail.component.scss']
 })
-export class UserDetailComponent implements OnInit {
+export class UserDetailComponent implements OnInit, OnDestroy {
 
+  develop = !environment.production;
   user: User;
   privateData: any;
   skills = Skills;
   loginUser$ = this.authService.user$;
   notFound: boolean;
   skillModel = SkillsModel;
+  subscription: Subscription;
 
   constructor(
     private userService: UserService,
@@ -31,7 +35,7 @@ export class UserDetailComponent implements OnInit {
     private dialog: MatDialog,
     private authService: AuthService
   ) {
-    userService.getUserByGitHub(route.snapshot.params.id).subscribe(userData => {
+    this.subscription = userService.getUserByGitHub(route.snapshot.params.id).subscribe(userData => {
       this.user = userData.publicData;
       this.privateData = userData.privateData;
       this.notFound = !this.user;
@@ -95,6 +99,10 @@ export class UserDetailComponent implements OnInit {
         uid: this.user.uid
       }
     });
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
 }

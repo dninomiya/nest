@@ -3,24 +3,24 @@
     <div *ngFor="let education of educations.controls; index as i" class="ctrl-group">
       <div [formGroupName]="i">
         <mat-form-field>
-          <input matInput placeholder="学校名" formControlName="name">
+          <input matInput placeholder="学校名" formControlName="name" required autocomplete="off">
         </mat-form-field>
         <mat-form-field class="ctrl-group__date">
-          <input matInput [matDatepicker]="startDp" placeholder="開始" formControlName="start">
+          <input matInput [matDatepicker]="startDp" placeholder="開始" formControlName="start" required autocomplete="off">
           <mat-datepicker-toggle matSuffix [for]="startDp"></mat-datepicker-toggle>
           <mat-datepicker #startDp startView="multi-year" (yearSelected)="chosenYearHandler($event, education.controls.start)" (monthSelected)="chosenMonthHandler($event, startDp, education.controls.start)"
             panelClass="month-picker">
           </mat-datepicker>
         </mat-form-field>
         <mat-form-field class="ctrl-group__date">
-          <input matInput [matDatepicker]="endDp" placeholder="終了" formControlName="end">
+          <input matInput [matDatepicker]="endDp" placeholder="終了" formControlName="end" required autocomplete="off">
           <mat-datepicker-toggle matSuffix [for]="endDp"></mat-datepicker-toggle>
           <mat-datepicker #endDp startView="multi-year" (yearSelected)="chosenYearHandler($event, education.controls.end)" (monthSelected)="chosenMonthHandler($event, endDp, education.controls.end)"
             panelClass="month-picker">
           </mat-datepicker>
         </mat-form-field>
         <mat-form-field class="ctrl-group__textarea">
-          <textarea matInput placeholder="概要" formControlName="description"></textarea>
+          <textarea matInput placeholder="概要" formControlName="description" required></textarea>
         </mat-form-field>
       </div>
       <button mat-icon-button type="button" (click)="removeCtrl(i)" class="ctrl-group__action">

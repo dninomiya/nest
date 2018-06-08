@@ -43,6 +43,7 @@ export class AuthService {
       if (this.isLoggedIn) {
         if (this.redirectUrl) {
           this.router.navigateByUrl(this.redirectUrl);
+          this.redirectUrl = null;
         }
       } else if (this.afUser) {
         this.userService.registerUser(this.afUser)
@@ -59,7 +60,7 @@ export class AuthService {
   }
 
   signOut() {
-    this.afAuth.auth.signOut();
     this.router.navigateByUrl('login');
+    this.afAuth.auth.signOut();
   }
 }

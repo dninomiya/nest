@@ -15,7 +15,7 @@
 
     <ng-container matColumnDef="type">
       <th mat-header-cell *matHeaderCellDef>タイプ</th>
-      <td mat-cell *matCellDef="let element" class="type">{{element.type}}</td>
+      <td mat-cell *matCellDef="let element" class="type">{{element.type | userType}}</td>
     </ng-container>
 
     <ng-container matColumnDef="rank">

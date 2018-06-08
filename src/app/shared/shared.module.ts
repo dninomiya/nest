@@ -33,6 +33,7 @@ import {
 import { UserTypePipe } from './user-type.pipe';
 import { RankDialogComponent } from './rank-dialog/rank-dialog.component';
 import { SkillLabelPipe } from './skill-label.pipe';
+import { NeedRankPipe } from './need-rank.pipe';
 
 @NgModule({
   imports: [
@@ -68,7 +69,8 @@ import { SkillLabelPipe } from './skill-label.pipe';
   declarations: [
     UserTypePipe,
     RankDialogComponent,
-    SkillLabelPipe
+    SkillLabelPipe,
+    NeedRankPipe
   ],
   exports: [
     ReactiveFormsModule,
@@ -101,6 +103,7 @@ import { SkillLabelPipe } from './skill-label.pipe';
     UserTypePipe,
     RankDialogComponent,
     SkillLabelPipe,
+    NeedRankPipe,
   ],
   entryComponents: [
     RankDialogComponent

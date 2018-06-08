@@ -3,16 +3,6 @@
 <mat-card>
   <mat-card-content>
     <button mat-flat-button color="primary" (click)="signIn()">GitHubでログイン</button>
-  </mat-card-content>
-</mat-card>
-
-<mat-card>
-  <mat-card-content>
-    <form (ngSubmit)="onRegister()" [formGroup]="form">
-      <mat-form-field>
-        <input type="text" matInput placeholder="ユーザー名" formControlName="userName">
-      </mat-form-field>
-    </form>
-    <button mat-flat-button color="primary" (click)="signIn()">GitHubで登録</button>
+    <button mat-flat-button color="primary" (click)="resetUser()">初期化</button>
   </mat-card-content>
 </mat-card>

@@ -12,7 +12,7 @@ export interface User {
   status: string;
   rank: string;
   type: string;
-  private?: {};
+  point: number;
 }
 
 export interface UserDataSet {
@@ -188,8 +188,18 @@ export class UserService {
     return this.db.doc(`test_users/${afUser.uid}`).set({
       uid: afUser.uid,
       gitHub: afUser.providerData[0].uid,
-      photoURL: afUser.photoURL
+      photoURL: afUser.photoURL,
+      point: 0,
+      rank: 'G'
     }, { merge: true });
+  }
+
+  getUsers() {
+    this.loadingService.pageLoadingSource.next(true);
+
+    return this.db.collection('test_users').valueChanges().pipe(
+      tap(users => this.loadingService.pageLoadingSource.next(false))
+    );
   }
 
   // checkUserNotTaken(userName) {

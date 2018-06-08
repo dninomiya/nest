@@ -21,7 +21,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
   }
 
   canLoad(route: Route) {
-    return this.checkLogin(window.location.pathname);
+    return this.checkLogin(location.pathname);
   }
 
   canActivate(

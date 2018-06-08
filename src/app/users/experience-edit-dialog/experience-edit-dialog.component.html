@@ -3,24 +3,24 @@
     <div *ngFor="let experience of experiences.controls; index as i" class="form-array-item">
       <div [formGroupName]="i" class="ctrl-group">
         <mat-form-field>
-          <input matInput placeholder="企業名" formControlName="name">
+          <input matInput placeholder="企業名" formControlName="name" autocomplete="off" required>
         </mat-form-field>
         <mat-form-field class="ctrl-group__date">
-          <input matInput [matDatepicker]="startDp" placeholder="開始" formControlName="start">
+          <input matInput [matDatepicker]="startDp" placeholder="開始" formControlName="start" autocomplete="off" required>
           <mat-datepicker-toggle matSuffix [for]="startDp"></mat-datepicker-toggle>
           <mat-datepicker #startDp startView="multi-year" (yearSelected)="chosenYearHandler($event, experience.controls.start)" (monthSelected)="chosenMonthHandler($event, startDp, experience.controls.start)"
             panelClass="month-picker">
           </mat-datepicker>
         </mat-form-field>
         <mat-form-field class="ctrl-group__date">
-          <input matInput [matDatepicker]="endDp" placeholder="終了" formControlName="end">
+          <input matInput [matDatepicker]="endDp" placeholder="終了" formControlName="end" autocomplete="off">
           <mat-datepicker-toggle matSuffix [for]="endDp"></mat-datepicker-toggle>
           <mat-datepicker #endDp startView="multi-year" (yearSelected)="chosenYearHandler($event, experience.controls.end)" (monthSelected)="chosenMonthHandler($event, endDp, experience.controls.end)"
             panelClass="month-picker">
           </mat-datepicker>
         </mat-form-field>
         <mat-form-field class="ctrl-group__textarea">
-          <textarea matInput placeholder="概要" formControlName="description"></textarea>
+          <textarea matInput placeholder="概要" formControlName="description" required></textarea>
         </mat-form-field>
         <button mat-icon-button class="ctrl-group__action" type="button" (click)="removeCtrl(i)"><mat-icon>remove_circle_outline</mat-icon></button>
       </div>

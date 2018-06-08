@@ -74,6 +74,8 @@ export class WorksEditDialogComponent implements OnInit {
           return this.fb.group({
             date: [item ? moment(item.date) : moment(), Validators.required],
             title: [item ? item.title : null, Validators.required],
+            code: [item ? item.code : null],
+            url: [item ? item.url : null, Validators.required],
             description: [item ? item.description : null, Validators.required],
           });
         })

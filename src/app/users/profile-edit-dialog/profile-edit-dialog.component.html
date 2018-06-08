@@ -1,28 +1,32 @@
 <form *ngIf="form" [formGroup]="form" (ngSubmit)="onSubmit()">
   <mat-form-field>
-    <mat-select placeholder="タイプ" formControlName="type">
+    <mat-select placeholder="タイプ" formControlName="type" required>
       <mat-option>未設定</mat-option>
       <mat-option *ngFor="let type of userTypes" [value]="type.id">
         {{ type.label }}
       </mat-option>
     </mat-select>
   </mat-form-field>
+  <mat-form-field class="form-group">
+    <textarea matInput placeholder="自己紹介" maxlength="155" #description formControlName="description" required></textarea>
+    <mat-hint>{{description.value.length}} / 155</mat-hint>
+  </mat-form-field>
   <div formGroupName="private">
     <mat-form-field class="form-group">
-      <input matInput placeholder="電話番号" type="tel" pattern="0[0-9]{9,10}" formControlName="tel">
+      <input matInput autocomplete="tel" placeholder="電話番号" type="tel" pattern="0[0-9]{9,10}" formControlName="tel" required>
     </mat-form-field>
     <mat-form-field class="form-group">
-      <input matInput placeholder="AdobeID" maxlength="50" type="email" formControlName="adobe" email>
+      <input matInput autocomplete="email" placeholder="AdobeID" maxlength="50" type="email" formControlName="adobe" email required>
     </mat-form-field>
     <mat-form-field class="form-group">
-      <input matInput placeholder="メール" maxlength="50" type="email" formControlName="email" email>
+      <input matInput autocomplete="email" placeholder="メール" maxlength="50" type="email" formControlName="email" email required>
     </mat-form-field>
     <mat-radio-group formControlName="gender" class="form-group form-group--radio">
-      <mat-radio-button value="male">男性</mat-radio-button>
-      <mat-radio-button value="female">女性</mat-radio-button>
+      <mat-radio-button autocomplete="gender" value="male">男性</mat-radio-button>
+      <mat-radio-button autocomplete="gender" value="female">女性</mat-radio-button>
     </mat-radio-group>
     <mat-form-field class="form-group">
-      <input matInput [matDatepicker]="picker" placeholder="生年月日" formControlName="bday">
+      <input matInput autocomplete="bday" [matDatepicker]="picker" placeholder="生年月日" formControlName="bday" required>
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>

@@ -2,18 +2,24 @@
   <div formArrayName="works">
     <div *ngFor="let work of works.controls; index as i" class="ctrl-group">
       <div [formGroupName]="i">
-        <mat-form-field>
-          <input matInput placeholder="title" formControlName="title">
+        <mat-form-field class="ctrl-group__text">
+          <input matInput autocomplete="none" placeholder="タイトル" formControlName="title" required>
         </mat-form-field>
         <mat-form-field class="ctrl-group__date">
-          <input matInput [matDatepicker]="dp" placeholder="開始" formControlName="date">
-          <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
-          <mat-datepicker #dp startView="multi-year" (yearSelected)="chosenYearHandler($event, work.controls.date)" (monthSelected)="chosenMonthHandler($event, dp, work.controls.date)"
-            panelClass="month-picker">
-          </mat-datepicker>
+            <input matInput autocomplete="off" [matDatepicker]="dp" placeholder="時期" formControlName="date" required>
+            <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+            <mat-datepicker #dp startView="multi-year" (yearSelected)="chosenYearHandler($event, work.controls.date)" (monthSelected)="chosenMonthHandler($event, dp, work.controls.date)"
+              panelClass="month-picker">
+            </mat-datepicker>
+          </mat-form-field>
+        <mat-form-field class="ctrl-group__text">
+          <input matInput type="url" placeholder="URL" autocomplete="off" formControlName="url" required>
+        </mat-form-field>
+        <mat-form-field class="ctrl-group__text">
+          <input matInput type="url" autocomplete="off" placeholder="ソースコード" formControlName="code">
         </mat-form-field>
         <mat-form-field class="ctrl-group__textarea">
-          <textarea matInput placeholder="概要" formControlName="description"></textarea>
+          <textarea matInput placeholder="概要" formControlName="description" required></textarea>
         </mat-form-field>
       </div>
       <button mat-icon-button type="button" (click)="removeCtrl(i)" class="ctrl-group__action">
