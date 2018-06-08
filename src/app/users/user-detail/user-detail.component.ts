@@ -24,7 +24,6 @@ export class UserDetailComponent implements OnInit, OnDestroy {
   user: User;
   privateData: any;
   skills = Skills;
-  loginUser$ = this.authService.user$;
   notFound: boolean;
   skillModel = SkillsModel;
   subscription: Subscription;

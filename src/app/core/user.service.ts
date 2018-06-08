@@ -201,12 +201,5 @@ export class UserService {
       tap(users => this.loadingService.pageLoadingSource.next(false))
     );
   }
-
-  // checkUserNotTaken(userName) {
-  //   this.db
-  //     .collection('test_users', ref => ref.where('userName', '==', userName))
-  //     .valueChanges()
-  //     .map(users => users)
-  // }
 }
 

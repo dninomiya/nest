@@ -135,7 +135,7 @@
             <mat-progress-spinner color="" class="rank__progress" [value]="(user | needRank).percent"></mat-progress-spinner>
           </div>
           <p class="rank-hint">次のランクまであと<strong>{{(user | needRank).point}}</strong>ポイント</p>
-          <button mat-stroked-button disabled color="primary" *ngIf="(loginUser$ | async)?.uid === user.uid">ランクテストを受ける</button>
+          <button mat-stroked-button disabled color="primary" *ngIf="user.uid === user.uid">ランクテストを受ける</button>
         </mat-card-content>
       </mat-card>
     </mat-grid-tile>
