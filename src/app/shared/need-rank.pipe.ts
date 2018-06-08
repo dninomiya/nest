@@ -10,12 +10,17 @@ export class NeedRankPipe implements PipeTransform {
   transform(user: User, args?: any): any {
     const ranks = Ranks;
     const currentIndex = ranks.findIndex(rank => rank.rank === user.rank);
+    const nextRankPoint = ranks[currentIndex - 1].point;
+    const diffPoint = nextRankPoint - user.point;
 
     if (currentIndex === 0) {
       return null;
     }
 
-    return ranks[currentIndex - 1].point - user.point;
+    return {
+      point: diffPoint < 0 ? 0 : diffPoint,
+      percent: user.point === 0 ? 0 : 50 / nextRankPoint * 100
+    };
   }
 
 }

@@ -160,6 +160,11 @@ export const Skills = [
     type: 'basic'
   },
   {
+    id: 'negotiation',
+    label: '顧客折衝経験',
+    type: 'basic'
+  },
+  {
     id: 'photoshop',
     label: 'Photo Shop',
     type: 'design'
@@ -173,6 +178,16 @@ export const Skills = [
     id: 'adobexd',
     label: 'AdobeXD',
     type: 'design'
+  },
+  {
+    id: 'estimate',
+    label: '工数見積',
+    type: 'management'
+  },
+  {
+    id: 'leader',
+    label: 'リードエンジニア',
+    type: 'management'
   },
   {
     id: 'direction',

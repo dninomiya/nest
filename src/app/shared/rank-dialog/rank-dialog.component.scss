@@ -2,3 +2,16 @@ table {
   width: 100%;
   margin-bottom: 24px;
 }
+
+p {
+  font-size: 13px;
+}
+
+.notice {
+  font-size: 10px;
+  color: #666666;
+  &:before {
+    content: "※";
+    margin-right: 3px;
+  }
+}

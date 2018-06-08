@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Ranks } from '../../core/rank.model';
 
 @Component({
   selector: 'nest-rank-dialog',
@@ -8,33 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class RankDialogComponent implements OnInit {
 
   displayedColumns: string[] = ['rank', 'day', 'month'];
-  dataSource = [
-    {
-      rank: 'A',
-      day: '35,000',
-      month: '700000'
-    },
-    {
-      rank: 'A',
-      day: '35,000',
-      month: '700000'
-    },
-    {
-      rank: 'A',
-      day: '35,000',
-      month: '700000'
-    },
-    {
-      rank: 'A',
-      day: '35,000',
-      month: '700000'
-    },
-    {
-      rank: 'A',
-      day: '35,000',
-      month: '700000'
-    },
-  ];
+  dataSource = Ranks;
 
   constructor() { }
 
