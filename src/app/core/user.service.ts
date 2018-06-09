@@ -231,7 +231,7 @@ export class UserService {
     this.loadingService.pageLoadingSource.next(true);
 
     return this.db.collection(usersDbPath).valueChanges().pipe(
-      tap(users => this.loadingService.pageLoadingSource.next(false))
+      tap(_ => this.loadingService.pageLoadingSource.next(false))
     );
   }
 

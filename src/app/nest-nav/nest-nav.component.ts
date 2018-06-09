@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { LoadingService } from '../core/loading.service';
 import { AuthService } from '../core/auth.service';
-import { User, UserService } from '../core/user.service';
+import { User } from '../core/user.service';
 import { environment } from '../../environments/environment';
 
 @Component({
@@ -26,7 +26,6 @@ export class NestNavComponent {
     private breakpointObserver: BreakpointObserver,
     private loadingService: LoadingService,
     private authService: AuthService,
-    private userService: UserService,
   ) { }
 
   signOut() {

@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router, Route, CanActivateChild, CanLoad } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
-import { environment } from '../../environments/environment';
-import { map, tap, take } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +10,6 @@ import { map, tap, take } from 'rxjs/operators';
 export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
 
   constructor(
-    private router: Router,
     private authService: AuthService
   ) {}
 

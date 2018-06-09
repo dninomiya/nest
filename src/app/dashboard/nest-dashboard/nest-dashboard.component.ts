@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { RankDialogComponent } from '../../shared/rank-dialog/rank-dialog.component';
 
@@ -8,10 +8,12 @@ import { RankDialogComponent } from '../../shared/rank-dialog/rank-dialog.compon
   styleUrls: ['./nest-dashboard.component.scss']
 })
 export class NestDashboardComponent {
-  constructor(private dialog: MatDialog) { }
+  constructor(
+    private dialog: MatDialog,
+  ) { }
 
   openRankDialog(): void {
-    const dialogRef = this.dialog.open(RankDialogComponent, {
+    this.dialog.open(RankDialogComponent, {
       width: '600px'
     });
   }
