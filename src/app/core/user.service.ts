@@ -6,6 +6,12 @@ import { Observable, of } from 'rxjs';
 import { LoadingService } from './loading.service';
 import { environment } from '../../environments/environment';
 
+export interface Work {
+  title: string;
+  url: string;
+  date: string;
+}
+
 export interface User {
   admin: boolean;
   uid: string;
@@ -14,6 +20,9 @@ export interface User {
   rank: string;
   type: string;
   point: number;
+  works?: Work[];
+  photoURL: string;
+  lastUpdate: number;
 }
 
 export interface UserDataSet {
@@ -27,7 +36,7 @@ export const UserTypes = [
     label: 'フロントエンドエンジニア'
   },
   {
-    id: 'server',
+    id: 'back',
     label: 'サーバーサイドエンジニア'
   },
   {
@@ -48,11 +57,20 @@ export const MockUsers: User[] = [
   {
     admin: true,
     uid: '111',
-    type: 'フルスタック',
-    gitHub: 'deerboy',
+    type: 'back',
+    gitHub: 'dummy-user',
     status: '活動中',
-    rank: 'A',
-    point: 20
+    rank: 'G',
+    photoURL: '/assets/dummy-profile-image.png',
+    point: 20,
+    lastUpdate: new Date().getTime(),
+    works: [
+      {
+        title: 'aaa',
+        url: 'aaaaaa',
+        date: 'Fri Jun 06 2014 10:44:32 GMT+0900'
+      }
+    ]
   },
   {
     admin: false,
@@ -61,6 +79,8 @@ export const MockUsers: User[] = [
     gitHub: 'iwamotoW',
     status: '休眠中',
     rank: 'B',
+    lastUpdate: new Date().getTime(),
+    photoURL: '/assets/dummy-profile-image.png',
     point: 20
   },
   {
@@ -70,6 +90,8 @@ export const MockUsers: User[] = [
     gitHub: 'yuFuji',
     status: '休眠中',
     rank: 'C',
+    lastUpdate: new Date().getTime(),
+    photoURL: '/assets/dummy-profile-image.png',
     point: 20
   }
 ];
@@ -147,11 +169,13 @@ export class UserService {
     return this.db.doc(`${usersDbPath}/${uid}/private/${doc}`).valueChanges();
   }
 
-  updateUser(uid: string, data) {
+  updateUser(uid: string, data = {}) {
+    data['lastUpdate'] = new Date();
     this.db.doc(`${usersDbPath}/${uid}`).set(data, { merge: true });
   }
 
   updateUserExperiences(uid: string, data) {
+    this.updateUser(uid);
     this.db
       .collection(usersDbPath)
       .doc(uid)
@@ -161,6 +185,7 @@ export class UserService {
   }
 
   updateUserEducations(uid: string, data) {
+    this.updateUser(uid);
     this.db
       .collection(usersDbPath)
       .doc(uid)
@@ -170,6 +195,7 @@ export class UserService {
   }
 
   updateUserProfile(uid: string, data) {
+    this.updateUser(uid);
     this.db
       .collection(usersDbPath)
       .doc(uid)
@@ -196,7 +222,8 @@ export class UserService {
       gitHub: afUser.providerData[0].uid,
       photoURL: afUser.photoURL,
       point: 0,
-      rank: 'G'
+      rank: 'G',
+      lastUpdate: new Date().getTime()
     }, { merge: true });
   }
 
@@ -206,6 +233,11 @@ export class UserService {
     return this.db.collection(usersDbPath).valueChanges().pipe(
       tap(users => this.loadingService.pageLoadingSource.next(false))
     );
+  }
+
+  addDummyUser() {
+    const mockuser = MockUsers[0];
+    this.db.doc(`test_users/${mockuser.uid}`).set(mockuser);
   }
 }
 

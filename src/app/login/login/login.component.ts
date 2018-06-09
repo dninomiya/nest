@@ -3,6 +3,7 @@ import { AuthService } from '../../core/auth.service';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { switchMap } from 'rxjs/operators';
 import { UserService } from '../../core/user.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'nest-login',
@@ -12,6 +13,7 @@ import { UserService } from '../../core/user.service';
 export class LoginComponent implements OnInit {
 
   form: FormGroup;
+  devmode = !environment.production;
 
   constructor(
     private authService: AuthService,
@@ -38,10 +40,8 @@ export class LoginComponent implements OnInit {
     this.userService.registerUser(this.authService.afUser);
   }
 
-  // validateEmailNotTaken(control: AbstractControl) {
-  //   return this.userService.checkUserNotTaken(control.value).map(res => {
-  //     return res ? null : { emailTaken: true };
-  //   });
-  // }
+  addDummyUser() {
+    this.userService.addDummyUser();
+  }
 
 }

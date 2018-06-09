@@ -9,7 +9,7 @@ import { UserService, MockUsers } from '../../core/user.service';
 })
 export class UsersComponent implements OnInit {
 
-  displayedColumns = ['gitHub', 'type', 'rank', 'status'];
+  displayedColumns = ['ID', 'タイプ', 'ランク', '最終更新日'];
   dataSource = new MatTableDataSource();
 
   @ViewChild(MatSort) sort: MatSort;

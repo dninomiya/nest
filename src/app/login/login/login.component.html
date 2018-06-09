@@ -3,6 +3,7 @@
 <mat-card>
   <mat-card-content>
     <button mat-flat-button color="primary" (click)="signIn()">GitHubでログイン</button>
-    <button mat-flat-button color="primary" (click)="resetUser()">初期化</button>
+    <button *ngIf="devmode" mat-button (click)="resetUser()">初期化</button>
+    <button *ngIf="devmode" mat-button (click)="addDummyUser()">ダミーユーザー追加</button>
   </mat-card-content>
 </mat-card>

@@ -33,6 +33,10 @@
               <mat-icon>input</mat-icon>
               <span>ログイン</span>
             </button>
+            <button *ngIf="develop" mat-menu-item routerLink="login">
+                <mat-icon>developer_mode</mat-icon>
+                <span>Develop</span>
+              </button>
             <button mat-menu-item routerLink="help">
               <mat-icon>help</mat-icon>
               <span>ヘルプ</span>
@@ -46,8 +50,13 @@
       </mat-toolbar-row>
     </mat-toolbar>
     <mat-progress-bar *ngIf="isPageLoading | async" mode="indeterminate"></mat-progress-bar>
-    <div class="container">
-      <router-outlet></router-outlet>
-    </div>
+    <main class="wrap">
+      <div class="container">
+        <router-outlet></router-outlet>
+      </div>
+    </main>
+    <footer class="footer">
+      <p>&copy; Deer, Inc.</p>
+    </footer>
   </mat-sidenav-content>
 </mat-sidenav-container>

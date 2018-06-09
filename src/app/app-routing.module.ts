@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AuthGuard } from './core/auth.guard';
+import { environment } from '../environments/environment';
 
 const routes: Routes = [
   {
