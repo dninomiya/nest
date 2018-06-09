@@ -62,10 +62,5 @@ export const Ranks: Rank[] = [
     month: null,
     description: '体験者',
     point: 0,
-    requirements: {
-      skill: [
-        'typing'
-      ]
-    }
   }
 ];

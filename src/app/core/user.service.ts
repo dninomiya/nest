@@ -50,7 +50,8 @@ export const MockUsers: User[] = [
     type: 'フルスタック',
     gitHub: 'deerboy',
     status: '活動中',
-    rank: 'A'
+    rank: 'A',
+    point: 20
   },
   {
     admin: false,
@@ -58,7 +59,8 @@ export const MockUsers: User[] = [
     type: 'フロントエンド',
     gitHub: 'iwamotoW',
     status: '休眠中',
-    rank: 'B'
+    rank: 'B',
+    point: 20
   },
   {
     admin: false,
@@ -66,7 +68,8 @@ export const MockUsers: User[] = [
     type: 'フロントエンド',
     gitHub: 'yuFuji',
     status: '休眠中',
-    rank: 'C'
+    rank: 'C',
+    point: 20
   }
 ];
 

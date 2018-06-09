@@ -67,8 +67,10 @@
         </mat-card-header>
         <mat-card-content>
           <div class="works">
-            <div class="work" *ngFor="let work of user.works">
-              <figure class="work__thumbnail" [style.background-image]="'url(http://www.designyourway.net/diverse/5/coolwebsites/music-incubator_eu.jpg)'"></figure>
+            <div class="work" *ngFor="let work of user.works; index as i">
+              <a [href]="work.url" target="_blank">
+              <figure class="work__thumbnail" [style.background-image]="'url(https://storage.cloud.google.com/update-hub.appspot.com/test_users/deerboy/work-' + (i + 1) + '.png)'"></figure>
+              </a>
               <p class="work__title">{{work.title}}</p>
               <p class="work__date">{{work.date | date:'yyyy/MM'}}</p>
             </div>

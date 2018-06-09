@@ -72,7 +72,7 @@ export class WorksEditDialogComponent implements OnInit {
       works: this.fb.array(
         items.map(item => {
           return this.fb.group({
-            date: [item ? moment(item.date) : moment(), Validators.required],
+            date: [item ? moment(new Date(item.date)) : moment(), Validators.required],
             title: [item ? item.title : null, Validators.required],
             code: [item ? item.code : null],
             url: [item ? item.url : null, Validators.required],
@@ -95,6 +95,8 @@ export class WorksEditDialogComponent implements OnInit {
           date: works.date.toString(),
           title: works.title,
           description: works.description,
+          url: works.url,
+          code: works.code,
         };
       });
       this.userService.updateUser(this.data.uid, data);
@@ -111,6 +113,8 @@ export class WorksEditDialogComponent implements OnInit {
       date: [moment(), Validators.required],
       title: [null, Validators.required],
       description: [null, Validators.required],
+      url: [null, Validators.required],
+      code: [null],
     }));
   }
 
