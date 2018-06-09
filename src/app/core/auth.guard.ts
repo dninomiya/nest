@@ -3,6 +3,7 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router, Route
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
 import { environment } from '../../environments/environment';
+import { map, tap, take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -22,10 +23,8 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
   }
 
   canLoad(route: Route) {
-    if (route.path && environment.production) {
-      this.router.navigateByUrl('users');
-    }
-    return this.checkLogin(location.pathname);
+    this.authService.redirectUrl = route.path;
+    return this.checkLogin(route.path).pipe(take(1));
   }
 
   canActivate(
@@ -38,12 +37,10 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
   }
 
   checkLogin(url: string) {
-    if (this.authService.isLoggedIn) { return true; }
-
-    if (url !== '/login') {
-      this.authService.redirectUrl = url;
-    }
-
-    return false;
+    return this.authService.user$.pipe(
+      map(user => {
+        return !!user;
+      }),
+    );
   }
 }

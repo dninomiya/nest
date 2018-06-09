@@ -1,6 +1,6 @@
 <mat-form-field class="search">
   <mat-label>絞り込む</mat-label>
-  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="" autofocus>
+  <input matInput autocomplete="off" (keyup)="applyFilter($event.target.value)" placeholder="" autofocus>
   <mat-icon matSuffix>filter_list</mat-icon>
 </mat-form-field>
 

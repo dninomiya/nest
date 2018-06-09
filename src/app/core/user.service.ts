@@ -236,7 +236,7 @@ export class UserService {
   }
 
   addDummyUser() {
-    const mockuser = MockUsers[0];
+    const mockuser = MockUsers[2];
     this.db.doc(`test_users/${mockuser.uid}`).set(mockuser);
   }
 }
