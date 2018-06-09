@@ -4,6 +4,7 @@ import { map, tap, zip, switchMap, combineLatest } from 'rxjs/operators';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { Observable, of } from 'rxjs';
 import { LoadingService } from './loading.service';
+import { environment } from '../../environments/environment';
 
 export interface User {
   admin: boolean;
@@ -73,6 +74,8 @@ export const MockUsers: User[] = [
   }
 ];
 
+const usersDbPath = environment.production ? 'users' : 'test_users';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -88,7 +91,7 @@ export class UserService {
 
   getUidByGitHub(gitHub: string): Observable<string> {
     return this.db
-      .collection<User>('test_users', ref => ref.where('gitHub', '==', gitHub))
+      .collection<User>(usersDbPath, ref => ref.where('gitHub', '==', gitHub))
       .valueChanges()
       .pipe(
         map(users => users[0] ? users[0].uid : null)
@@ -119,7 +122,7 @@ export class UserService {
   getFullUserByUid(uid: string): Observable<UserDataSet> {
     return this.getUserByUid(uid).pipe(
       combineLatest(
-        this.db.collection(`test_users/${uid}/private`).valueChanges(),
+        this.db.collection(`${usersDbPath}/${uid}/private`).valueChanges(),
         (publicData, privateCollection) => {
           let privateData = {};
 
@@ -137,20 +140,20 @@ export class UserService {
   }
 
   getUserByUid(uid: string): Observable<User> {
-    return this.db.doc<User>(`test_users/${uid}`).valueChanges();
+    return this.db.doc<User>(`${usersDbPath}/${uid}`).valueChanges();
   }
 
   getUserPrivateByUid(uid: string, doc: string): Observable<{}> {
-    return this.db.doc(`test_users/${uid}/private/${doc}`).valueChanges();
+    return this.db.doc(`${usersDbPath}/${uid}/private/${doc}`).valueChanges();
   }
 
   updateUser(uid: string, data) {
-    this.db.doc(`test_users/${uid}`).set(data, { merge: true });
+    this.db.doc(`${usersDbPath}/${uid}`).set(data, { merge: true });
   }
 
   updateUserExperiences(uid: string, data) {
     this.db
-      .collection('test_users')
+      .collection(usersDbPath)
       .doc(uid)
       .collection('private')
       .doc('experience')
@@ -159,7 +162,7 @@ export class UserService {
 
   updateUserEducations(uid: string, data) {
     this.db
-      .collection('test_users')
+      .collection(usersDbPath)
       .doc(uid)
       .collection('private')
       .doc('educations')
@@ -168,7 +171,7 @@ export class UserService {
 
   updateUserProfile(uid: string, data) {
     this.db
-      .collection('test_users')
+      .collection(usersDbPath)
       .doc(uid)
       .collection('private')
       .doc('profile')
@@ -184,11 +187,11 @@ export class UserService {
   }
 
   registerUser(afUser) {
-    this.db.doc(`test_users/${afUser.uid}/private/profile`).set({
+    this.db.doc(`${usersDbPath}/${afUser.uid}/private/profile`).set({
       email: afUser.email
     });
 
-    return this.db.doc(`test_users/${afUser.uid}`).set({
+    return this.db.doc(`${usersDbPath}/${afUser.uid}`).set({
       uid: afUser.uid,
       gitHub: afUser.providerData[0].uid,
       photoURL: afUser.photoURL,
@@ -200,7 +203,7 @@ export class UserService {
   getUsers() {
     this.loadingService.pageLoadingSource.next(true);
 
-    return this.db.collection('test_users').valueChanges().pipe(
+    return this.db.collection(usersDbPath).valueChanges().pipe(
       tap(users => this.loadingService.pageLoadingSource.next(false))
     );
   }
