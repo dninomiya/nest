@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router, Route, CanActivateChild, CanLoad } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
-import { map, take } from 'rxjs/operators';
+import { map, take, tap } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -23,7 +23,6 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
   }
 
   canLoad(route: Route) {
-    this.authService.redirectUrl = route.path;
     return this.checkLogin(route.path).pipe(take(1));
   }
 
@@ -42,9 +41,13 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
 
   checkLogin(url: string) {
     return this.authService.user$.pipe(
-      map(user => {
-        return !!user;
-      }),
+      map(user => !!user),
+      tap(isLoggedIn => {
+        if (!isLoggedIn) {
+          this.authService.redirectUrl = url;
+          this.router.navigateByUrl('login');
+        }
+      })
     );
   }
 }

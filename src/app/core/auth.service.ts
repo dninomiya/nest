@@ -48,8 +48,6 @@ export class AuthService {
       } else if (this.afUser) {
         this.userService.registerUser(this.afUser)
           .then(res => this.router.navigate(['users', this.afUser.gitHub]));
-      } else {
-        this.router.navigate(['/login']);
       }
       this.loadingService.pageLoadingSource.next(false);
     });
