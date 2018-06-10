@@ -61,4 +61,10 @@ export class AuthService {
     this.router.navigateByUrl('login');
     this.afAuth.auth.signOut();
   }
+
+  deleteUser() {
+    if (this.afUser) {
+      this.afUser.delete();
+    }
+  }
 }

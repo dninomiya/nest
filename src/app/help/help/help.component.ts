@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../core/auth.service';
+import { UserService } from '../../core/user.service';
 
 @Component({
   selector: 'nest-help',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HelpComponent implements OnInit {
 
-  constructor() { }
+  isLoggedIn = this.authService.isLoggedIn;
+
+  constructor(
+    private authService: AuthService
+  ) { }
 
   ngOnInit() {
+  }
+
+  unsubscribe() {
+    this.authService.unsubscribe();
   }
 
 }
