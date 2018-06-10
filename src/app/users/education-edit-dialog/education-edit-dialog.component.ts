@@ -67,7 +67,7 @@ export class EducationEditDialogComponent implements OnInit {
   }
 
   createForm(user) {
-    const items = (user.educations && user.educations[0]) ? user.educations : [{}];
+    const items = (user && user.educations && user.educations[0]) ? user.educations : [{}];
     this.form = this.fb.group({
       educations: this.fb.array(
         items.map(item => {
