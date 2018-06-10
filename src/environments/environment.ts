@@ -5,12 +5,12 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: 'AIzaSyCInwvI4hMc5auV0y03G9D6o9JvN4_iiCc',
-    authDomain: 'update-hub.firebaseapp.com',
-    databaseURL: 'https://update-hub.firebaseio.com',
-    projectId: 'update-hub',
-    storageBucket: 'update-hub.appspot.com',
-    messagingSenderId: '899817327474'
+    apiKey: 'AIzaSyC9X60YaqZ5wNsAkIOzwUGv0aMBVG8EeXA',
+    authDomain: 'update-hub-dev.firebaseapp.com',
+    databaseURL: 'https://update-hub-dev.firebaseio.com',
+    projectId: 'update-hub-dev',
+    storageBucket: 'update-hub-dev.appspot.com',
+    messagingSenderId: '738846950031'
   }
 };
 
