@@ -3,6 +3,7 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router, Route
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
 import { map, take } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,8 @@ import { map, take } from 'rxjs/operators';
 export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   canActivateChild(
@@ -30,6 +32,10 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
     const url: string = state.url;
+
+    if (url === '/' && environment.production) {
+      this.router.navigateByUrl('users');
+    }
 
     return this.checkLogin(url);
   }

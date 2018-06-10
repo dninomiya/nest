@@ -8,7 +8,7 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    loadChildren: environment.production ? './users/users.module#UsersModule' : './dashboard/dashboard.module#DashboardModule',
+    loadChildren: './dashboard/dashboard.module#DashboardModule',
     canActivate: [AuthGuard],
     canLoad: [AuthGuard]
   },

@@ -170,7 +170,7 @@ export class UserService {
   }
 
   updateUser(uid: string, data = {}) {
-    data['lastUpdate'] = new Date();
+    data['lastUpdate'] = new Date().getTime();
     this.db.doc(`${usersDbPath}/${uid}`).set(data, { merge: true });
   }
 
