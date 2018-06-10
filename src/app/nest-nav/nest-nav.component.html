@@ -7,7 +7,7 @@
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <mat-toolbar color="primary">
+    <mat-toolbar [color]="develop ? 'warn' : 'primary'">
       <mat-toolbar-row>
         <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" *ngIf="isHandset$ | async">
           <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
@@ -15,10 +15,12 @@
         <button mat-button routerLink="">Update</button>
         <span class="spacer"></span>
         <div *ngIf="!(isHandset$ | async)">
-          <button mat-button routerLink="" *ngIf="develop">ダッシュボード</button>
-          <button mat-button routerLink="users">ユーザー</button>
-          <button mat-button routerLink="training" *ngIf="develop">トレーニング</button>
-          <button mat-button routerLink="jobs" *ngIf="develop">ジョブ</button>
+          <ng-template [ngIf]="user$ | async">
+            <button mat-button routerLink="" *ngIf="develop">ダッシュボード</button>
+            <button mat-button routerLink="users">ユーザー</button>
+            <button mat-button routerLink="training" *ngIf="develop">トレーニング</button>
+            <button mat-button routerLink="jobs" *ngIf="develop">ジョブ</button>
+          </ng-template>
           <button mat-icon-button [matMenuTriggerFor]="menu">
             <mat-icon>more_vert</mat-icon>
           </button>
@@ -32,9 +34,9 @@
               <span>ログイン</span>
             </button>
             <button *ngIf="develop" mat-menu-item routerLink="login">
-                <mat-icon>developer_mode</mat-icon>
-                <span>Develop</span>
-              </button>
+              <mat-icon>developer_mode</mat-icon>
+              <span>Develop</span>
+            </button>
             <button mat-menu-item routerLink="help">
               <mat-icon>help</mat-icon>
               <span>ヘルプ</span>
