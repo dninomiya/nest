@@ -5,30 +5,34 @@ service cloud.firestore {
       return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.admin == true;
     }
 
-    function isOwner() {
-      return request.auth.uid == user;
+    function isLoggedIn() {
+      return request.auth.uid != null;
     }
 
-    match /users/{user} {
-      allow read, create: if true;
+    match /users/{userId} {
+      function isOwner() {
+        return request.auth.uid == userId;
+      }
+      allow read, create: if isLoggedIn();
       allow update, delete: if isAdmin() || isOwner();
-      match /private/{key} {
-        allow read, create: if isAdmin() || isOwner();
-        allow update, delete: if isAdmin() || isOwner();
+      match /{private=**} {
+        allow read, write: if isAdmin() || isOwner();
       }
     }
 
-    match /test_users/{user} {
-      allow read, create: if true;
+    match /test_users/{userId} {
+      function isOwner() {
+        return request.auth.uid == userId;
+      }
+      allow read, create: if isLoggedIn();
       allow update, delete: if isAdmin() || isOwner();
       match /private/{key} {
-        allow read, create: if isAdmin() || isOwner();
-        allow update, delete: if isAdmin() || isOwner();
+        allow read, write: if isAdmin() || isOwner();
       }
     }
 
-    match /jobs/{job} {
-      allow read: if true;
+    match /jobs/{job=**} {
+      allow read: if isLoggedIn();
       allow write: if isAdmin();
     }
   }

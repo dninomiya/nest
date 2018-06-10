@@ -14,7 +14,7 @@
         <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" *ngIf="isHandset$ | async">
           <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
         </button>
-        <button mat-button routerLink="">Nest</button>
+        <button mat-button routerLink="">Update</button>
         <span class="spacer"></span>
         <div *ngIf="!(isHandset$ | async)">
           <button mat-button routerLink="" *ngIf="develop">ダッシュボード</button>
