@@ -96,8 +96,6 @@ export const MockUsers: User[] = [
   }
 ];
 
-const usersDbPath = environment.production ? 'users' : 'test_users';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -113,7 +111,7 @@ export class UserService {
 
   getUidByGitHub(gitHub: string): Observable<string> {
     return this.db
-      .collection<User>(usersDbPath, ref => ref.where('gitHub', '==', gitHub))
+      .collection<User>('users', ref => ref.where('gitHub', '==', gitHub))
       .valueChanges()
       .pipe(
         map(users => users[0] ? users[0].uid : null)
@@ -144,7 +142,7 @@ export class UserService {
   getFullUserByUid(uid: string): Observable<UserDataSet> {
     return this.getUserByUid(uid).pipe(
       combineLatest(
-        this.db.collection(`${usersDbPath}/${uid}/private`).valueChanges(),
+        this.db.collection(`users/${uid}/private`).valueChanges(),
         (publicData, privateCollection) => {
           let privateData = {};
 
@@ -162,22 +160,22 @@ export class UserService {
   }
 
   getUserByUid(uid: string): Observable<User> {
-    return this.db.doc<User>(`${usersDbPath}/${uid}`).valueChanges();
+    return this.db.doc<User>(`users/${uid}`).valueChanges();
   }
 
   getUserPrivateByUid(uid: string, doc: string): Observable<{}> {
-    return this.db.doc(`${usersDbPath}/${uid}/private/${doc}`).valueChanges();
+    return this.db.doc(`users/${uid}/private/${doc}`).valueChanges();
   }
 
   updateUser(uid: string, data = {}) {
     data['lastUpdate'] = new Date().getTime();
-    this.db.doc(`${usersDbPath}/${uid}`).set(data, { merge: true });
+    this.db.doc(`users/${uid}`).set(data, { merge: true });
   }
 
   updateUserExperiences(uid: string, data) {
     this.updateUser(uid);
     this.db
-      .collection(usersDbPath)
+      .collection('users')
       .doc(uid)
       .collection('private')
       .doc('experience')
@@ -187,7 +185,7 @@ export class UserService {
   updateUserEducations(uid: string, data) {
     this.updateUser(uid);
     this.db
-      .collection(usersDbPath)
+      .collection('users')
       .doc(uid)
       .collection('private')
       .doc('educations')
@@ -197,7 +195,7 @@ export class UserService {
   updateUserProfile(uid: string, data) {
     this.updateUser(uid);
     this.db
-      .collection(usersDbPath)
+      .collection('users')
       .doc(uid)
       .collection('private')
       .doc('profile')
@@ -213,11 +211,11 @@ export class UserService {
   }
 
   registerUser(afUser) {
-    this.db.doc(`${usersDbPath}/${afUser.uid}/private/profile`).set({
+    this.db.doc(`users/${afUser.uid}/private/profile`).set({
       email: afUser.email
     });
 
-    return this.db.doc(`${usersDbPath}/${afUser.uid}`).set({
+    return this.db.doc(`users/${afUser.uid}`).set({
       uid: afUser.uid,
       gitHub: afUser.providerData[0].uid,
       photoURL: afUser.photoURL,
@@ -230,14 +228,14 @@ export class UserService {
   getUsers() {
     this.loadingService.pageLoadingSource.next(true);
 
-    return this.db.collection(usersDbPath).valueChanges().pipe(
+    return this.db.collection('users').valueChanges().pipe(
       tap(_ => this.loadingService.pageLoadingSource.next(false))
     );
   }
 
   addDummyUser() {
     const mockuser = MockUsers[2];
-    this.db.doc(`test_users/${mockuser.uid}`).set(mockuser);
+    this.db.doc(`users/${mockuser.uid}`).set(mockuser);
   }
 }
 
