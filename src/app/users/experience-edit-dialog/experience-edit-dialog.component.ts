@@ -67,13 +67,13 @@ export class ExperienceEditDialogComponent implements OnInit {
   }
 
   createForm(user) {
-    const items = user.experiences[0] ? user.experiences : [{}];
+    const items = user.experiences && user.experiences[0] ? user.experiences : [{}];
     this.form = this.fb.group({
       experiences: this.fb.array(
         items.map(item => {
           return this.fb.group({
-            start: [item ? moment(item.start) : moment(), Validators.required],
-            end: [item ? moment(item.end) : moment()],
+            start: [item && item.start ? moment(new Date(item.start)) : moment(), Validators.required],
+            end: [item && item.end ? moment(new Date(item.end)) : moment()],
             name: [item ? item.name : null, Validators.required],
             description: [item ? item.description : null, Validators.required],
           });

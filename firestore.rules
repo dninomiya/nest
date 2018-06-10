@@ -15,7 +15,7 @@ service cloud.firestore {
       }
       allow read, create: if isLoggedIn();
       allow update, delete: if isAdmin() || isOwner();
-      match /{private=**} {
+      match /private/{docs} {
         allow read, write: if isAdmin() || isOwner();
       }
     }
