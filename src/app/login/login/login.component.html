@@ -2,8 +2,12 @@
 
 <mat-card>
   <mat-card-content>
+    <p>Updateにログインするには<a href="https://github.com/" target="_blank">GitHub</a>のアカウント（無料）が必要です。</p>
     <button mat-flat-button color="primary" (click)="signIn()">GitHubでログイン</button>
-    <button *ngIf="devmode" mat-button (click)="resetUser()">初期化</button>
-    <button *ngIf="devmode" mat-button (click)="addDummyUser()">ダミーユーザー追加</button>
   </mat-card-content>
+</mat-card>
+
+<mat-card *ngIf="devmode">
+  <button mat-button (click)="resetUser()">初期化</button>
+  <button mat-button (click)="addDummyUser()">ダミーユーザー追加</button>
 </mat-card>

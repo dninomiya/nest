@@ -28,6 +28,7 @@ import {
   MatDatepickerModule,
   MatNativeDateModule,
   MatCheckboxModule,
+  MatSnackBarModule,
 } from '@angular/material';
 
 import { UserTypePipe } from './user-type.pipe';
@@ -65,6 +66,7 @@ import { NeedRankPipe } from './need-rank.pipe';
     MatDatepickerModule,
     MatNativeDateModule,
     MatCheckboxModule,
+    MatSnackBarModule,
   ],
   declarations: [
     UserTypePipe,
@@ -100,6 +102,7 @@ import { NeedRankPipe } from './need-rank.pipe';
     MatDatepickerModule,
     MatNativeDateModule,
     MatCheckboxModule,
+    MatSnackBarModule,
     UserTypePipe,
     RankDialogComponent,
     SkillLabelPipe,

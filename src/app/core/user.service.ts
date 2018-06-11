@@ -4,7 +4,7 @@ import { map, tap, zip, switchMap, combineLatest } from 'rxjs/operators';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { Observable, of } from 'rxjs';
 import { LoadingService } from './loading.service';
-import { environment } from '../../environments/environment';
+import { HttpClient } from '@angular/common/http';
 
 export interface Work {
   title: string;
@@ -106,7 +106,8 @@ export class UserService {
 
   constructor(
     private db: AngularFirestore,
-    private loadingService: LoadingService
+    private loadingService: LoadingService,
+    private http: HttpClient
   ) { }
 
   getUidByGitHub(gitHub: string): Observable<string> {
@@ -206,7 +207,18 @@ export class UserService {
     this.uid = uid;
   }
 
+  deleteUser(uid: string) {
+    return this.db.doc(`users/${uid}/private/profile`).delete();
+  }
+
   setUser(user: User) {
+    if (!this.user && user) {
+      this.http.get(`https://api.github.com/user/${user.gitHub}`).subscribe(gitHubUser => {
+        this.updateUser(this.user.uid, {
+          nickname: gitHubUser['login']
+        });
+      });
+    }
     this.user = user;
   }
 

@@ -9,7 +9,7 @@
     <ng-container matColumnDef="ID">
       <th mat-header-cell *matHeaderCellDef>GitHub</th>
       <td mat-cell *matCellDef="let element">
-        <a [routerLink]="element.gitHub" class="link">{{element.gitHub}}</a>
+        <a [routerLink]="element.gitHub" class="link">{{element.nickname || element.gitHub}}</a>
       </td>
     </ng-container>
 

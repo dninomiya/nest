@@ -6,7 +6,12 @@
     <p>デイリーレポートを送信やトレーニングをクリアすることでたまります。逆に、デイリーレポートを怠るとポイントが減ります。</p>
   </mat-expansion-panel>
   <mat-expansion-panel>
-      <mat-expansion-panel-header>仕事の紹介を受けるにはどうすれば良いですか？</mat-expansion-panel-header>
-      <p>ランクE以上になることで仕事の紹介を受けることができます。</p>
-    </mat-expansion-panel>
+    <mat-expansion-panel-header>仕事の紹介を受けるにはどうすれば良いですか？</mat-expansion-panel-header>
+    <p>ランクE以上になることで仕事の紹介を受けることができます。</p>
+  </mat-expansion-panel>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>どうすれば退会できますか？</mat-expansion-panel-header>
+    <p>ログイン後、下記ボタンをクリックして退会してください。退会と同時にあなたのユーザーデータは完全に消去されます。復元することはできないので十分ご注意ください。</p>
+    <button mat-button (click)="unsubscribe()" [disabled]="!isLoggedIn">{{isLoggedIn ? '退会する' : 'ログインしてください'}}</button>
+  </mat-expansion-panel>
 </mat-accordion>

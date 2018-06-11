@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../core/auth.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'nest-help',
@@ -7,9 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HelpComponent implements OnInit {
 
-  constructor() { }
+  isLoggedIn = this.authService.isLoggedIn;
+
+  constructor(
+    private authService: AuthService,
+    public snackBar: MatSnackBar
+  ) { }
 
   ngOnInit() {
+  }
+
+  unsubscribe() {
+    this.authService.deleteUser().subscribe(_ => {
+      this.isLoggedIn = false;
+      this.snackBar.open('退会しました。', null, {
+        duration: 2000,
+      });
+    });
   }
 
 }
