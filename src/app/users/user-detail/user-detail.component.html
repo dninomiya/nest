@@ -69,7 +69,7 @@
           <div class="works">
             <div class="work" *ngFor="let work of user.works; index as i">
               <a [href]="work.url" target="_blank">
-              <figure class="work__thumbnail" [style.background-image]="'url(http://capture.heartrails.com/300×300?' + work.url + ')'"></figure>
+              <figure class="work__thumbnail" [style.background-image]="'url(https://capture.heartrails.com/400×300?' + work.url + ')'"></figure>
               </a>
               <p class="work__title">{{work.title}}</p>
               <p class="work__date">{{work.date | date:'yyyy/MM'}}</p>
