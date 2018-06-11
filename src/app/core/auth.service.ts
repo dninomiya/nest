@@ -40,16 +40,11 @@ export class AuthService {
 
     this.user$.subscribe(user => {
       this.isLoggedIn = !!user;
-      if (this.isLoggedIn) {
-        if (this.redirectUrl) {
-          this.router.navigateByUrl(this.redirectUrl || `users/${user.gitHub}`);
-          this.redirectUrl = null;
-        } else {
-          this.router.navigateByUrl(`users/${user.gitHub}`);
-        }
-      } else if (this.afUser) {
+      if (!this.isLoggedIn && this.afUser) {
         this.userService.registerUser(this.afUser)
-          .then(res => this.router.navigate(['users', this.afUser.gitHub]));
+          .then(_ => this.router.navigate(['users', this.afUser.gitHub]));
+      } else if (this.isLoggedIn && this.router.url === '/login') {
+        this.router.navigate(['users', user.gitHub]);
       }
       this.loadingService.pageLoadingSource.next(false);
     });
