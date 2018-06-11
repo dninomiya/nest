@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { switchMap, tap } from 'rxjs/operators';
+import { switchMap, tap, zip } from 'rxjs/operators';
 import { Observable, of, Subject, BehaviorSubject } from 'rxjs';
 import * as firebase from 'firebase/app';
 import { UserService, User } from './user.service';
@@ -42,8 +42,10 @@ export class AuthService {
       this.isLoggedIn = !!user;
       if (this.isLoggedIn) {
         if (this.redirectUrl) {
-          this.router.navigateByUrl(this.redirectUrl);
+          this.router.navigateByUrl(this.redirectUrl || `users/${user.gitHub}`);
           this.redirectUrl = null;
+        } else {
+          this.router.navigateByUrl(`users/${user.gitHub}`);
         }
       } else if (this.afUser) {
         this.userService.registerUser(this.afUser)
@@ -54,7 +56,7 @@ export class AuthService {
   }
 
   signIn() {
-    this.afAuth.auth.signInWithPopup(new firebase.auth.GithubAuthProvider());
+    this.afAuth.auth.signInWithRedirect(new firebase.auth.GithubAuthProvider());
   }
 
   signOut() {
@@ -64,7 +66,9 @@ export class AuthService {
 
   deleteUser() {
     if (this.afUser) {
-      this.afUser.delete();
+      return this.afUser.delete().pipe(
+        zip(this.userService.deleteUser(this.afUser.uid))
+      );
     }
   }
 }

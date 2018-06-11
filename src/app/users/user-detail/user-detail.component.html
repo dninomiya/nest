@@ -14,7 +14,7 @@
           <div class="profile">
             <img [src]="user.photoURL" alt="" class="profile__image">
             <div class="profile__body">
-              <p class="profile__name">{{user.gitHub}}</p>
+              <p class="profile__name">{{user.nickname || user.gitHub}}</p>
               <p class="profile__type">{{(user.type | userType) || 'タイプ未設定'}}</p>
             </div>
           </div>
