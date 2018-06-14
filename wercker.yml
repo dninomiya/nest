@@ -1,11 +1,10 @@
-box: node
+box: dala00/chromium-xvfb-angular-cli
 
 build:
   steps:
     - npm-install
-    - npm-test
+
     - script:
-        name: echo nodejs information
+        name: test start
         code: |
-          echo "node version $(node -v) running"
-          echo "npm version $(npm -v) running"
+          ng test --single-run
