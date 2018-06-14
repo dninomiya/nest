@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
 import { UserService } from '../../core/user.service';
 import { MAT_DIALOG_DATA, MAT_DATE_LOCALE, DateAdapter, MAT_DATE_FORMATS, MatDatepicker, MatDialogRef } from '@angular/material';
-import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
+import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import * as _moment from 'moment';
 
 import { default as _rollupMoment, Moment } from 'moment';
@@ -24,7 +24,6 @@ export const MY_FORMATS = {
 };
 
 @Component({
-  selector: 'nest-education-edit-dialog',
   templateUrl: './education-edit-dialog.component.html',
   styleUrls: ['./education-edit-dialog.component.scss'],
   providers: [

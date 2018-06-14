@@ -32,7 +32,6 @@ import {
 } from '@angular/material';
 
 import { UserTypePipe } from './user-type.pipe';
-import { RankDialogComponent } from './rank-dialog/rank-dialog.component';
 import { SkillLabelPipe } from './skill-label.pipe';
 import { NeedRankPipe } from './need-rank.pipe';
 
@@ -70,7 +69,6 @@ import { NeedRankPipe } from './need-rank.pipe';
   ],
   declarations: [
     UserTypePipe,
-    RankDialogComponent,
     SkillLabelPipe,
     NeedRankPipe
   ],
@@ -104,12 +102,8 @@ import { NeedRankPipe } from './need-rank.pipe';
     MatCheckboxModule,
     MatSnackBarModule,
     UserTypePipe,
-    RankDialogComponent,
     SkillLabelPipe,
     NeedRankPipe,
   ],
-  entryComponents: [
-    RankDialogComponent
-  ]
 })
 export class SharedModule { }

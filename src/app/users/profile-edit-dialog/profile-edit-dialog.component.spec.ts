@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProfileEditDialogComponent } from './profile-edit-dialog.component';
+import { SharedModule } from '../../shared/shared.module';
+import { CoreModule } from '../../core/core.module';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 describe('ProfileEditDialogComponent', () => {
   let component: ProfileEditDialogComponent;
@@ -8,7 +11,15 @@ describe('ProfileEditDialogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProfileEditDialogComponent ]
+      declarations: [ ProfileEditDialogComponent ],
+      imports: [
+        SharedModule,
+        CoreModule
+      ],
+      providers: [
+        { provide: MatDialogRef, useValue: {} },
+        { provide: MAT_DIALOG_DATA, useValue: {} }
+      ]
     })
     .compileComponents();
   }));

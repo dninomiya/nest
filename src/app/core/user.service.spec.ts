@@ -1,11 +1,15 @@
 import { TestBed, inject } from '@angular/core/testing';
 
 import { UserService } from './user.service';
+import { CoreModule } from './core.module';
 
 describe('UserService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [UserService]
+      providers: [UserService],
+      imports: [
+        CoreModule
+      ]
     });
   });
 

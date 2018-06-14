@@ -68,7 +68,7 @@
         <mat-card-content>
           <div class="works">
             <div class="work" *ngFor="let work of user.works; index as i">
-              <a [href]="work.url" target="_blank">
+              <a [href]="work.url" target="new">
               <figure class="work__thumbnail" [style.background-image]="'url(https://capture.heartrails.com/400×300?' + work.url + ')'"></figure>
               </a>
               <p class="work__title">{{work.title}}</p>

@@ -1,4 +1,4 @@
-box: devillex/docker-firebase
+box: node
 
 build:
   steps:

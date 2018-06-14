@@ -10,6 +10,7 @@ import { EducationEditDialogComponent } from './education-edit-dialog/education-
 import { ExperienceEditDialogComponent } from './experience-edit-dialog/experience-edit-dialog.component';
 import { WorksEditDialogComponent } from './works-edit-dialog/works-edit-dialog.component';
 import { SkillEditDialogComponent } from './skill-edit-dialog/skill-edit-dialog.component';
+import { RankDialogComponent } from '../shared/rank-dialog/rank-dialog.component';
 
 @NgModule({
   imports: [
@@ -25,6 +26,7 @@ import { SkillEditDialogComponent } from './skill-edit-dialog/skill-edit-dialog.
     ExperienceEditDialogComponent,
     WorksEditDialogComponent,
     SkillEditDialogComponent,
+    RankDialogComponent
   ],
   entryComponents: [
     ProfileEditDialogComponent,
@@ -32,6 +34,7 @@ import { SkillEditDialogComponent } from './skill-edit-dialog/skill-edit-dialog.
     ExperienceEditDialogComponent,
     WorksEditDialogComponent,
     SkillEditDialogComponent,
+    RankDialogComponent
   ]
 })
 export class UsersModule { }

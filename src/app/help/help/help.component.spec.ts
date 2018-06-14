@@ -1,6 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HelpComponent } from './help.component';
+import { SharedModule } from '../../shared/shared.module';
+import { CoreModule } from '../../core/core.module';
+import { RouterTestingModule } from '@angular/router/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('HelpComponent', () => {
   let component: HelpComponent;
@@ -8,7 +12,13 @@ describe('HelpComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HelpComponent ]
+      declarations: [ HelpComponent ],
+      imports: [
+        SharedModule,
+        CoreModule,
+        RouterTestingModule,
+        BrowserAnimationsModule
+      ]
     })
     .compileComponents();
   }));

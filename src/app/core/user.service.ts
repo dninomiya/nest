@@ -112,7 +112,7 @@ export class UserService {
 
   getUidByGitHub(gitHub: string): Observable<string> {
     return this.db
-      .collection<User>('users', ref => ref.where('gitHub', '==', gitHub))
+      .collection<User>('users', ref => ref.where('gitHub', '==', gitHub || ''))
       .valueChanges()
       .pipe(
         map(users => users[0] ? users[0].uid : null)

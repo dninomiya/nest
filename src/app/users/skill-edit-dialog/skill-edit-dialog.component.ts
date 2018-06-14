@@ -2,7 +2,6 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 import { UserService } from '../../core/user.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { WorksEditDialogComponent } from '../works-edit-dialog/works-edit-dialog.component';
 import { Skills } from '../../core/skills.model';
 
 @Component({
@@ -19,7 +18,7 @@ export class SkillEditDialogComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
-    public dialogRef: MatDialogRef<WorksEditDialogComponent>,
+    public dialogRef: MatDialogRef<SkillEditDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     if (data && data.uid) {

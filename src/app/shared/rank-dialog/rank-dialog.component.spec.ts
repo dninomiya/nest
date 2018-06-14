@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RankDialogComponent } from './rank-dialog.component';
+import { SharedModule } from '../shared.module';
 
 describe('RankDialogComponent', () => {
   let component: RankDialogComponent;
@@ -8,7 +9,10 @@ describe('RankDialogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RankDialogComponent ]
+      declarations: [ RankDialogComponent ],
+      imports: [
+        SharedModule
+      ]
     })
     .compileComponents();
   }));
