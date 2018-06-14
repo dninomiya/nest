@@ -1,10 +1,9 @@
-box: dala00/chromium-xvfb-angular-cli
+box: node
 
 build:
+  - npm-install
   steps:
-    - npm-install
-
     - script:
-        name: test start
-        code: |
-          ng test --single-run
+      name: test start
+      code: |
+        ng test
