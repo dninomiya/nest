@@ -1,9 +1,6 @@
 box: node
 
 build:
-  - npm-install
   steps:
-    - script:
-      name: test start
-      code: |
-        ng test
+    - npm-install
+    - npm-test
