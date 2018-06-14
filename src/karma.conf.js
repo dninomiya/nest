@@ -37,7 +37,7 @@ module.exports = function (config) {
         ]
       }
     },
-    browsers: ['PhantomJS', 'ChromeHeadless'],
+    browsers: ['PhantomJS'],
     singleRun: true
   });
 };
