@@ -9,7 +9,6 @@ describe('RankDialogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RankDialogComponent ],
       imports: [
         SharedModule
       ]

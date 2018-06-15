@@ -34,6 +34,7 @@ import {
 import { UserTypePipe } from './user-type.pipe';
 import { SkillLabelPipe } from './skill-label.pipe';
 import { NeedRankPipe } from './need-rank.pipe';
+import { RankDialogComponent } from './rank-dialog/rank-dialog.component';
 
 @NgModule({
   imports: [
@@ -70,7 +71,8 @@ import { NeedRankPipe } from './need-rank.pipe';
   declarations: [
     UserTypePipe,
     SkillLabelPipe,
-    NeedRankPipe
+    NeedRankPipe,
+    RankDialogComponent
   ],
   exports: [
     ReactiveFormsModule,
@@ -104,6 +106,10 @@ import { NeedRankPipe } from './need-rank.pipe';
     UserTypePipe,
     SkillLabelPipe,
     NeedRankPipe,
+    RankDialogComponent
   ],
+  entryComponents: [
+    RankDialogComponent
+  ]
 })
 export class SharedModule { }
