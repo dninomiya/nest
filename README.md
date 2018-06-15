@@ -1,4 +1,4 @@
-[![wercker status](https://app.wercker.com/status/990dc9e499b8d6cc063cf011f6b036d1/s/master "wercker status")](https://app.wercker.com/project/byKey/990dc9e499b8d6cc063cf011f6b036d1)
+[![CircleCI](https://circleci.com/gh/deerboy/nest/tree/master.svg?style=svg)](https://circleci.com/gh/deerboy/nest/tree/master)
 
 # Nest
 
