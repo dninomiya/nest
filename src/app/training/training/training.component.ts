@@ -8,6 +8,8 @@ import { TrainingService } from '../../core/training.service';
 })
 export class TrainingComponent implements OnInit {
 
+  groups = this.trainingService.getGroups();
+
   constructor(private trainingService: TrainingService) { }
 
   ngOnInit() {

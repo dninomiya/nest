@@ -1,16 +1,14 @@
 <h1>トレーニング</h1>
 
-<button mat-raised-button routerLink="create">トレーニング追加</button>
-
 <mat-grid-list cols="3" rowHeight="300px">
-  <mat-grid-tile [colspan]="1" [rowspan]="1">
+  <mat-grid-tile [colspan]="1" [rowspan]="1" *ngFor="let group of groups">
     <mat-card class="training-card">
-      <p class="training-card__title">準備</p>
+      <p class="training-card__title">{{group.label}}</p>
       <mat-card-content>
-        <p>まずは開発準備を行います。</p>
+        <p>{{group.description}}</p>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-button>はじめる</button>
+        <button mat-button [routerLink]="[group.id, 'installation']">はじめる</button>
       </mat-card-actions>
     </mat-card>
   </mat-grid-tile>

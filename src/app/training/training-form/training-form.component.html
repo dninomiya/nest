@@ -1,4 +1,4 @@
-<h1>トレーニング追加</h1>
+<h1>トレーニング{{tid ? '編集' : '追加'}}</h1>
 
 <form *ngIf="form" [formGroup]="form" (ngSubmit)="onSubmit()">
 
@@ -34,5 +34,7 @@
     </button>
   </div>
 
-  <button mat-raised-button color="primary">更新</button>
+  {{form.value | json }}
+
+  <button mat-raised-button color="primary">{{tid ? '更新' : '追加'}}</button>
 </form>

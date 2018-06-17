@@ -5,6 +5,7 @@ import { TrainingRoutingModule } from './training-routing.module';
 import { TrainingComponent } from './training/training.component';
 import { SharedModule } from '../shared/shared.module';
 import { TrainingFormComponent } from './training-form/training-form.component';
+import { TrainingDetailComponent } from './training-detail/training-detail.component';
 
 @NgModule({
   imports: [
@@ -12,6 +13,6 @@ import { TrainingFormComponent } from './training-form/training-form.component';
     TrainingRoutingModule,
     SharedModule
   ],
-  declarations: [TrainingComponent, TrainingFormComponent]
+  declarations: [TrainingComponent, TrainingFormComponent, TrainingDetailComponent]
 })
 export class TrainingModule { }

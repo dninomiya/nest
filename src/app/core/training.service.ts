@@ -5,25 +5,51 @@ export interface Task {
   point: number;
 }
 
+export const trainingModel = {
+  'basic': {
+    'installation': {
+      title: '準備',
+      tasks: [
+        {
+          title: 'VSCインストール',
+          point: 10
+        }
+      ]
+    }
+  }
+};
+
 export interface Training {
+  id: string;
   title: string;
   tasks: Task[];
-  permalink: string;
-  group: string;
 }
 
 export const groups = [
   {
-    id: 'init',
-    label: '準備'
-  },
-  {
     id: 'basic',
-    label: '基礎'
+    label: '基礎',
+    description: '基礎トレーニングを行います。'
   },
   {
     id: 'front',
-    label: '基礎'
+    label: 'フロントエンド',
+    description: '基礎トレーニングを行います。'
+  },
+  {
+    id: 'back',
+    label: 'バックエンド',
+    description: '基礎トレーニングを行います。'
+  },
+  {
+    id: 'designer',
+    label: 'デザイナー',
+    description: '基礎トレーニングを行います。'
+  },
+  {
+    id: 'director',
+    label: 'ディレクター',
+    description: '基礎トレーニングを行います。'
   }
 ];
 
@@ -34,15 +60,20 @@ export class TrainingService {
 
   constructor() { }
 
-  getTraining(tid: string) {
-
-  }
-
   addTraining(data) {
 
   }
 
-  editTraining(tid: string, data) {
+  getTraining(gid: string, tid: string): Training {
+    return trainingModel[gid][tid];
+  }
 
+  getTrainings(group: string): Training[] {
+    return trainingModel[group];
+  }
+
+  getGroups() {
+    console.log(groups);
+    return groups;
   }
 }
