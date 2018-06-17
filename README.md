@@ -1,4 +1,5 @@
 [![CircleCI](https://circleci.com/gh/deerboy/nest/tree/master.svg?style=svg)](https://circleci.com/gh/deerboy/nest/tree/master)
+[![SlackIn](https://slackin-yaolyarkix.now.sh/badge.svg)](https://slackin-yaolyarkix.now.sh/)
 
 # Nest
 
