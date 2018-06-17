@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { TrainingRoutingModule } from './training-routing.module';
 import { TrainingComponent } from './training/training.component';
 import { SharedModule } from '../shared/shared.module';
+import { TrainingFormComponent } from './training-form/training-form.component';
 
 @NgModule({
   imports: [
@@ -11,6 +12,6 @@ import { SharedModule } from '../shared/shared.module';
     TrainingRoutingModule,
     SharedModule
   ],
-  declarations: [TrainingComponent]
+  declarations: [TrainingComponent, TrainingFormComponent]
 })
 export class TrainingModule { }

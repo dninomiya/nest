@@ -3,14 +3,25 @@
   padding: 30px 0;
 }
 
-.bad-status {
-  text-align: center;
-  color: #999999;
-  &__icon {
-    font-size: 50px;
+.training-card {
+  overflow: hidden;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+  display: flex;
+  flex-flow: column;
+  .mat-card-content {
+    flex: 1;
   }
-  &__text {
-    font-size: 16px;
-    margin-bottom: 0;
+  &__title {
+    padding: 60px 24px;
+    text-align: center;
+    font-size: 24px;
+    color: #666;
+    background: #fff;
+    border-bottom: 1px solid #ddd;
+    margin: -24px -24px 24px!important;
   }
 }

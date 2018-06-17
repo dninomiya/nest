@@ -1,0 +1,38 @@
+<h1>トレーニング追加</h1>
+
+<form *ngIf="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+
+  <mat-form-field>
+    <mat-select placeholder="グループ" formControlName="group" required>
+      <mat-option>未設定</mat-option>
+      <mat-option *ngFor="let group of groups" [value]="group.id">
+        {{ group.label }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input type="text" placeholder="トレーニング名" autocomplete="off" matInput formControlName="title" required>
+  </mat-form-field>
+
+  <div formArrayName="tasks">
+    <div *ngFor="let task of tasks.controls; index as i">
+      <div [formGroupName]="i">
+        <mat-form-field>
+          <input type="text" placeholder="タスク名" autocomplete="off" matInput formControlName="title" required>
+        </mat-form-field>
+        <mat-form-field>
+          <input type="number" placeholder="ポイント" autocomplete="off" matInput formControlName="point" required>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <button mat-mini-fab type="button" (click)="addTask()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+
+  <button mat-raised-button color="primary">更新</button>
+</form>
