@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/earlyaccess/notosansjapanese.css");
+@import "variables";
 
 html {
   height: 100%;
@@ -22,5 +23,29 @@ body {
   }
   form {
     font-size: 13px;
+  }
+}
+
+.point {
+  line-height: 20px;
+  border-radius: 10px;
+  font-size: 10px;
+  padding: 0 10px;
+  background: $primary;
+  display: inline-block;
+  color: #ffffff;
+  text-align: center;
+  vertical-align: 3px;
+  margin-left: 16px;
+  &:after {
+    content: "pt";
+  }
+}
+
+
+.markdown {
+  iframe {
+    display: block;
+    max-width: 100%;
   }
 }

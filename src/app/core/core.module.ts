@@ -7,7 +7,6 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../../environments/environment';
-import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
@@ -16,7 +15,6 @@ import { HttpClientModule } from '@angular/common/http';
     AngularFirestoreModule,
     AngularFireAuthModule,
     AngularFireStorageModule,
-    HttpClientModule
   ],
   declarations: [NotFoundComponent]
 })

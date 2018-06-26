@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Training, TrainingService } from '../../core/training.service';
 import { ActivatedRoute } from '@angular/router';
-
 @Component({
   selector: 'nest-training-detail',
   templateUrl: './training-detail.component.html',
@@ -9,9 +8,14 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class TrainingDetailComponent implements OnInit {
 
+  group = this.route.snapshot.params.gid;
+  title = this.route.snapshot.params.tid;
+
+  doc = require(`raw-loader!./docs/${this.group}/${this.title}.md`);
+
   training: Training = this.trainingService.getTraining(
-    this.route.snapshot.params.gid,
-    this.route.snapshot.params.tid,
+    this.group,
+    this.title,
   );
 
   constructor(
