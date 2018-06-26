@@ -9,6 +9,7 @@
     "deploy": "ng build --aot --prod && firebase deploy --only hosting",
     "lint": "ng lint",
     "e2e": "ng e2e",
+    "compodoc": "./node_modules/.bin/compodoc -p src/tsconfig.app.json",
     "version": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md"
   },
   "private": true,
@@ -39,6 +40,7 @@
     "@angular/cli": "~6.0.3",
     "@angular/compiler-cli": "^6.0.2",
     "@angular/language-service": "^6.0.2",
+    "@compodoc/compodoc": "^1.1.3",
     "@types/jasmine": "~2.8.6",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
